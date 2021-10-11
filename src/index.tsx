@@ -1,6 +1,7 @@
 import { createBrowserHistory } from 'history';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -16,11 +17,15 @@ export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(t
 
 export const history = createBrowserHistory();
 
+const queryClient = new QueryClient();
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <ThemeProvider>
-        <Root />
+        <QueryClientProvider client={queryClient}>
+          <Root />
+        </QueryClientProvider>
       </ThemeProvider>
     </Router>
   </Provider>,

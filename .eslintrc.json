@@ -11,7 +11,7 @@
     "@typescript-eslint/explicit-function-return-type": [
       "warn",
       {
-        "allowHigherOrderFunctions": false,
+        "allowHigherOrderFunctions": true,
         "allowDirectConstAssertionInArrowFunctions": false
       }
     ],
@@ -89,6 +89,12 @@
       "files": ["**/*.test.ts", "**/*.test.tsx"],
       "rules": {
         "import/no-extraneous-dependencies": "off"
+      }
+    },
+    {
+      "files": ["**/hooks.ts"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": "off"
       }
     }
   ],

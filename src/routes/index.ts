@@ -3,7 +3,7 @@ import { RouteProps } from 'react-router';
 import { ROUTE_PATHS } from './constants';
 
 import CreateClothes from 'pages/CreateClothes';
-import Login from 'pages/Login';
+import Main from 'pages/Main';
 
 export interface IRoute extends RouteProps {
   requiresAuthentication: boolean;
@@ -11,20 +11,26 @@ export interface IRoute extends RouteProps {
 
 const routes: IRoute[] = [
   {
-    path: ROUTE_PATHS.login,
-    component: Login,
-    exact: true,
-    requiresAuthentication: false,
-  },
-  {
-    path: ROUTE_PATHS.createClothes,
+    path: ROUTE_PATHS.createGarment,
     component: CreateClothes,
     exact: true,
     requiresAuthentication: false,
   },
   {
+    path: ROUTE_PATHS.editGarment(),
+    component: CreateClothes,
+    exact: true,
+    requiresAuthentication: false,
+  },
+  {
+    path: ROUTE_PATHS.main,
+    component: Main,
+    exact: true,
+    requiresAuthentication: false,
+  },
+  {
     path: ROUTE_PATHS[404],
-    component: Login,
+    component: CreateClothes,
     exact: true,
     requiresAuthentication: false,
   },

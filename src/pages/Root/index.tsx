@@ -1,27 +1,23 @@
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { Switch } from 'react-router-dom';
 
+import SideNavigation from './components/SideNavigation';
 import { renderRoutes } from './helpers';
 import { useRoot } from './hooks';
-
-import Header from 'components/Header';
+import { useStyles } from './styles';
 
 const Root: FC = () => {
-  const { history } = useRoot();
+  const classes = useStyles();
 
-  useEffect(() => {
-    history.listen(() => {
-      window.scrollTo(0, 0);
-    });
-  }, []);
+  useRoot();
 
   return (
-    <Box>
+    <Box className={classes.pageWrapper}>
       <CssBaseline />
-      <Header />
-      <Box>
+      <SideNavigation />
+      <Box className={classes.contentWrapper}>
         <Switch>{renderRoutes()}</Switch>
       </Box>
     </Box>
