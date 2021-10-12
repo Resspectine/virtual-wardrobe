@@ -1,6 +1,7 @@
 export const ROUTE_PATHS = {
   main: '/main',
   createGarment: '/create/garment',
+  tagsList: '/tags',
   editGarment: (id = ':id'): string => `/create/garment/${id}`,
   404: '/*',
 };

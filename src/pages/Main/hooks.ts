@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
-import { loadGarments, triggerFavorite, wearGarment } from './mock';
+import { loadGarments, removeGarment, triggerFavorite, wearGarment } from './mock';
 
 import { useDoubleClick } from 'lib/hooks/useDoubleClick';
 import { useHoldClick } from 'lib/hooks/useHoldClick';
@@ -49,6 +49,12 @@ export const useMain = () => {
     },
   });
 
+  const { mutate: mutateRemove } = useMutation(removeGarment, {
+    onSettled: () => {
+      queryClient.invalidateQueries('garments');
+    },
+  });
+
   const popoverList = [
     {
       onMouseUp: (): void => mutateFavorite(activeGarmentId),
@@ -57,6 +63,10 @@ export const useMain = () => {
     {
       onMouseUp: (): void => history.push(ROUTE_PATHS.editGarment(activeGarmentId)),
       children: 'Edit',
+    },
+    {
+      onMouseUp: (): void => mutateRemove(activeGarmentId),
+      children: 'Delete',
     },
   ];
 

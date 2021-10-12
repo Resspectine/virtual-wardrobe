@@ -1,4 +1,4 @@
-import { getGarments, updateFavoriteStatus, updateWearingAmount } from 'localStorage';
+import { deleteGarment, getGarments, updateFavoriteStatus, updateWearingAmount } from 'localStorage';
 import { IGarment } from 'types/garment';
 
 export const loadGarments = (): Promise<IGarment[]> => Promise.resolve(getGarments() || []);
@@ -15,6 +15,14 @@ export const triggerFavorite = (garmentId: string): Promise<void> =>
   new Promise(resolve => {
     setTimeout(() => {
       updateFavoriteStatus(garmentId);
+      resolve();
+    }, 500);
+  });
+
+export const removeGarment = (garmentId: string): Promise<void> =>
+  new Promise(resolve => {
+    setTimeout(() => {
+      deleteGarment(garmentId);
       resolve();
     }, 500);
   });
