@@ -23,7 +23,7 @@ const NewTag = forwardRef(({ closeModal }: INewTag) => {
   const { status, control, onSubmit } = useNewTag();
 
   return (
-    <Box>
+    <Box className={classes.paper}>
       <Typography>Create clothes</Typography>
       <form onSubmit={onSubmit} className={classes.form}>
         {getFormFieldConfigurations(control).map((props, index) => (

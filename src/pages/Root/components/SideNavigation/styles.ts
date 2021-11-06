@@ -15,6 +15,7 @@ export const useStyles = makeStyles(theme =>
       textDecoration: 'none',
       color: theme.palette.text.primary,
       fontSize: 18,
+      cursor: 'pointer',
     },
     separator: {
       height: 2,

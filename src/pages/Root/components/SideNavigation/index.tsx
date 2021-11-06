@@ -1,7 +1,8 @@
+import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import omit from 'lodash/omit';
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { useStyles } from './styles';
 
@@ -12,14 +13,17 @@ const routes = omit(ROUTE_PATHS, KEYS_TO_OMIT) as Omit<typeof ROUTE_PATHS, Types
 
 const SideNavigation: FC = () => {
   const classes = useStyles();
+  const history = useHistory();
+
+  const goTo = (link: string): void => {
+    history.push(link);
+  };
 
   return (
     <Box className={classes.sideNavigationWrapper}>
       {Object.entries(routes).map(([linkName, link], index) => (
-        <Box key={index} className={classes.linkWrapper}>
-          <Link className={classes.link} to={link}>
-            {camelToSentenceCase(linkName)}
-          </Link>
+        <Box key={index} className={classes.linkWrapper} onClick={(): void => goTo(link)}>
+          <Typography className={classes.link}>{camelToSentenceCase(linkName)}</Typography>
           <Box className={classes.separator} />
         </Box>
       ))}

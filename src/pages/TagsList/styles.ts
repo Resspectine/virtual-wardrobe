@@ -2,11 +2,7 @@ import { makeStyles, createStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles(theme =>
   createStyles({
-    listWrapper: {
-      margin: '0 -15px',
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
+    listWrapper: {},
     popoverWrapper: {
       padding: '5px',
     },
