@@ -1,4 +1,4 @@
-import { InputProps } from '@material-ui/core/Input';
+import { InputProps } from '@mui/material/Input';
 import React, { ComponentType, useRef, useEffect, ChangeEvent, useMemo } from 'react';
 import { v4 } from 'uuid';
 

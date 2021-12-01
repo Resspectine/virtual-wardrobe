@@ -55,5 +55,4 @@ module.exports = {
     ],
   },
   // plugins: [], DON'T set plugins in common configuration, extends of this file don't merge this configuration.
-  bail: true,
 };

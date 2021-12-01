@@ -1,44 +1,71 @@
-import Box from '@material-ui/core/Box';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import clsx from 'clsx';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+import { SxProps, Theme } from '@mui/system';
 import React, { FC } from 'react';
 
-import { useStyles } from './styles';
-
 interface ILoadingProps {
-  className?: string;
-  classes?: { root?: string; icon?: string };
+  sxs?: { root?: SxProps<Theme>; icon?: SxProps<Theme> };
 }
 
 interface ILoadingWithShadowProps {
   loading: boolean;
-  className?: string;
-  classes?: { root?: string; loadingShadow?: string };
+  sxs?: { root?: SxProps<Theme>; loadingShadow?: SxProps<Theme> };
 }
 
-const Loading: FC<ILoadingProps> = ({ className, classes }) => {
-  const localClasses = useStyles();
+const Loading: FC<ILoadingProps> = ({ sxs }) => (
+  <Box
+    sx={{
+      width: '100%',
+      height: '100%',
+      top: 0,
+      left: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      ...sxs?.root,
+    }}
+  >
+    <CircularProgress
+      sx={{
+        ...sxs?.icon,
+      }}
+    />
+  </Box>
+);
 
-  return (
-    <div className={clsx(localClasses.loadingWrapper, className, classes?.root)}>
-      <CircularProgress className={clsx(classes?.icon)} />
-    </div>
-  );
-};
-
-export const LoadingWithShadow: FC<ILoadingWithShadowProps> = ({ children, loading, className, classes }) => {
-  const localClasses = useStyles();
-
-  return (
-    <Box position="relative" className={clsx(className, classes?.root)}>
-      {loading && (
-        <Box className={clsx(localClasses.loadingShadow, classes?.loadingShadow)}>
-          <Loading classes={{ icon: localClasses.shadowLoadingPosition }} />
-        </Box>
-      )}
-      {children}
-    </Box>
-  );
-};
+export const LoadingWithShadow: FC<ILoadingWithShadowProps> = ({ children, loading, sxs }) => (
+  <Box
+    position="relative"
+    sx={{
+      ...sxs?.root,
+    }}
+  >
+    {loading && (
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          zIndex: 1,
+          right: 0,
+          bottom: 0,
+          backgroundColor: '#76767614',
+          borderRadius: '10px',
+          ...sxs?.loadingShadow,
+        }}
+      >
+        <Loading
+          sxs={{
+            icon: {
+              top: 80,
+              position: 'absolute',
+            },
+          }}
+        />
+      </Box>
+    )}
+    {children}
+  </Box>
+);
 
 export default Loading;

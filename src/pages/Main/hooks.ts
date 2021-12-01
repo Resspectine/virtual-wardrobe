@@ -47,25 +47,31 @@ export const useMain = () => {
     onSettled: () => {
       queryClient.invalidateQueries('garments');
     },
+    onMutate: () => {
+      setIsOpened(false);
+    },
   });
 
   const { mutate: mutateRemove } = useMutation(removeGarment, {
     onSettled: () => {
       queryClient.invalidateQueries('garments');
     },
+    onMutate: () => {
+      setIsOpened(false);
+    },
   });
 
   const popoverList = [
     {
-      onMouseUp: (): void => mutateFavorite(activeGarmentId),
+      onClick: (): void => mutateFavorite(activeGarmentId),
       children: 'Toggle favorite',
     },
     {
-      onMouseUp: (): void => history.push(ROUTE_PATHS.editGarment(activeGarmentId)),
+      onClick: (): void => history.push(ROUTE_PATHS.editGarment(activeGarmentId)),
       children: 'Edit',
     },
     {
-      onMouseUp: (): void => mutateRemove(activeGarmentId),
+      onClick: (): void => mutateRemove(activeGarmentId),
       children: 'Delete',
     },
   ];

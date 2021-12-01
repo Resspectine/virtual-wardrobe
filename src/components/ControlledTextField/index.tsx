@@ -1,17 +1,18 @@
-import { TextField, TextFieldProps } from '@material-ui/core';
+import TextField, { TextFieldProps } from '@mui/material/TextField';
+import { SxProps, Theme } from '@mui/system';
 import React, { ReactElement } from 'react';
 import { UseControllerProps, useController, FieldValues } from 'react-hook-form';
 
 export interface IControlledTextField<T extends FieldValues> {
   textFieldProps: TextFieldProps;
   controlProps: UseControllerProps<T>;
-  className?: string;
+  sx?: SxProps<Theme>;
 }
 
 function ControlledTextField<T extends FieldValues>({
   controlProps,
   textFieldProps,
-  className,
+  sx,
 }: IControlledTextField<T>): ReactElement | null {
   const { field, fieldState } = useController(controlProps);
 
@@ -19,7 +20,7 @@ function ControlledTextField<T extends FieldValues>({
     <TextField
       {...textFieldProps}
       {...field}
-      className={className}
+      sx={sx}
       error={!!fieldState.error}
       helperText={(fieldState.error as { message: string } | undefined)?.message}
     />

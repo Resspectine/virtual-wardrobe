@@ -1,7 +1,8 @@
 const path = require('path');
-const webpack = require('webpack');
-const addReactDisplayname = require('babel-plugin-add-react-displayname');
+
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const webpack = require('webpack');
+
 const commonConfig = require('./webpack.common.js');
 
 module.exports = {
@@ -16,13 +17,13 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     compress: true,
-    stats: {
-      all: false,
-      modules: false,
-      timings: true,
-      errors: true,
-      warnings: true,
-    },
+  },
+  stats: {
+    all: false,
+    modules: false,
+    timings: true,
+    errors: true,
+    warnings: true,
   },
   plugins: [
     new ForkTsCheckerWebpackPlugin(),
@@ -34,6 +35,5 @@ module.exports = {
       manifest: require(path.resolve('dist', 'vendors/vendors-manifest.json')),
       name: 'vendors',
     }),
-    addReactDisplayname,
   ],
 };

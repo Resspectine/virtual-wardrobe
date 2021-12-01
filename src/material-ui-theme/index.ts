@@ -1,5 +1,4 @@
-import { createTheme } from '@material-ui/core/styles';
-import { PaletteOptions } from '@material-ui/core/styles/createPalette';
+import { createTheme } from '@mui/material/styles';
 
 export const commonColors = {
   mainBlack: '#1f1f2b',
@@ -27,62 +26,13 @@ export const commonColors = {
   yellow: '#df7b00',
 };
 
-export enum BREAK_POINTS {
-  LARGE = 'lg',
-  MEDIUM = 'md',
-  SMALL = 'sm',
-  EXTRA_SMALL = 'xs',
-}
-
-export const boxShadow = '0 6px 20px rgba(109, 104, 139, .2)';
-
-export const defaultBoxBorder = `1px solid ${commonColors.grayLines}`;
-
-export const transition = '500ms all cubic-bezier(.4, 0, .2, 1)';
-
-export const leftNavigationWidth = 200;
-
-export const leftNavigationCollapsedWidth = 80;
-
-export const TOP_MARGIN = 84;
-
-export const BOTTOM_MARGIN = 25;
-
-export const fontWeight = {
-  lighter: 100,
-  thin: 300,
-  regular: 400,
-  semiBold: 500,
-  bold: 600,
-};
-
-export const modalWidth = {
-  extraSmall: 340,
-  small: 540,
-  medium: 690,
-  large: 890,
-};
-
-export const inputWidth = {
-  small: 290,
-  medium: 340,
-  large: 400,
-};
-
-export const inputHeight = {
-  small: 36,
-  medium: 38,
-};
-
-export const materialTheme = (palette: PaletteOptions) =>
-  createTheme({
-    palette: {
-      ...palette,
-      background: {
-        default: commonColors.backgroundGray,
-      },
+export const materialTheme = createTheme({
+  palette: {
+    background: {
+      default: commonColors.backgroundGray,
     },
-    typography: {
-      fontFamily: 'Montserrat, Times New Roman',
-    },
-  });
+  },
+  typography: {
+    fontFamily: 'Montserrat, Times New Roman',
+  },
+});

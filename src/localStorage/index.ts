@@ -38,3 +38,5 @@ export const setTags = (tags: ITag[]): void => localStorage.setItem(KEYS.TAGS_CO
 export const getTags = (): ITag[] | null => JSON.parse(localStorage.getItem(KEYS.TAGS_COLLECTION) || 'null');
 
 export const createTag = (tag: ITag): void => setTags((getTags() || []).concat(tag));
+
+export const deleteTag = (tagId: string): void => setTags((getTags() || []).filter(tag => tag.id !== tagId));

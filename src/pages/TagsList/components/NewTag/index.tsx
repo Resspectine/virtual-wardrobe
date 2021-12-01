@@ -1,11 +1,10 @@
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import React, { forwardRef } from 'react';
 
 import { getFormFieldConfigurations } from './helpers';
 import { useNewTag } from './hooks';
-import { useStyles } from './styles';
 
 import ControlledTextField from 'components/ControlledTextField';
 import FormSubmitStatus from 'components/FormSubmitStatus';
@@ -19,24 +18,69 @@ export interface INewTag {
 }
 
 const NewTag = forwardRef(({ closeModal }: INewTag) => {
-  const classes = useStyles();
   const { status, control, onSubmit } = useNewTag();
 
   return (
-    <Box className={classes.paper}>
+    <Box
+      sx={theme => ({
+        position: 'absolute',
+        width: 400,
+        backgroundColor: theme.palette.background.paper,
+        border: '1px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        borderRadius: 2,
+      })}
+    >
       <Typography>Create clothes</Typography>
-      <form onSubmit={onSubmit} className={classes.form}>
+      <Box
+        component="form"
+        onSubmit={onSubmit}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
         {getFormFieldConfigurations(control).map((props, index) => (
-          <ControlledTextField {...props} key={index} className={classes.fieldInput} />
+          <ControlledTextField
+            {...props}
+            key={index}
+            sx={{
+              '&.MuiTextField-root': {
+                marginBottom: 1.25,
+                width: '100%',
+              },
+            }}
+          />
         ))}
         <FormSubmitStatus status={status} />
-        <Button type="submit" variant="outlined" className={classes.submit}>
-          Submit
-        </Button>
-        <Button onClick={closeModal} variant="outlined" className={classes.submit}>
-          Close
-        </Button>
-      </form>
+        <Box
+          sx={{
+            marginTop: 1.25,
+            width: '100%',
+            justifyContent: 'space-between',
+            display: 'flex',
+          }}
+        >
+          <Button onClick={closeModal} variant="outlined">
+            Close
+          </Button>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{
+              color: '#fff',
+            }}
+          >
+            Submit
+          </Button>
+        </Box>
+      </Box>
     </Box>
   );
 });

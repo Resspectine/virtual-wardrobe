@@ -1,11 +1,10 @@
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import React, { FC } from 'react';
 
 import { getFormFieldConfigurations } from './helpers';
 import { useCreateClothes } from './hooks';
-import { useStyles } from './styles';
 
 import ControlledTextField from 'components/ControlledTextField';
 import FileUpload from 'components/FileUpload';
@@ -20,22 +19,46 @@ export interface ICreateClothesValues {
 }
 
 const CreateClothes: FC = () => {
-  const classes = useStyles();
   const { status, control, onSubmit, watch, register, setValue } = useCreateClothes();
 
   return (
     <Box>
       <Typography>Create clothes</Typography>
-      <form onSubmit={onSubmit} className={classes.form}>
+      <Box
+        component="form"
+        onSubmit={onSubmit}
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
         {getFormFieldConfigurations(control, watch).map((props, index) => (
-          <ControlledTextField {...props} key={index} className={classes.fieldInput} />
+          <ControlledTextField
+            {...props}
+            key={index}
+            sx={{
+              '&.MuiTextField-root': {
+                marginBottom: 1.25,
+                width: '100%',
+              },
+            }}
+          />
         ))}
         <FileUpload register={register} name="image" file={watch('image')[0]} setValue={setValue} />
         <FormSubmitStatus status={status} />
-        <Button type="submit" variant="outlined" className={classes.submit}>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          sx={{
+            marginTop: 1.25,
+            color: '#fff',
+          }}
+        >
           Submit
         </Button>
-      </form>
+      </Box>
     </Box>
   );
 };

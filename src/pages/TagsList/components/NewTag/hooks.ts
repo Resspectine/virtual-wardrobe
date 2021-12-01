@@ -10,7 +10,7 @@ export const useNewTag = () => {
   const queryClient = useQueryClient();
   const { mutate, status } = useMutation(createNewTag);
 
-  const { control, handleSubmit } = useForm<INewTagValues>({
+  const { control, handleSubmit, reset } = useForm<INewTagValues>({
     defaultValues: {
       title: '',
     },
@@ -25,6 +25,7 @@ export const useNewTag = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries('tags');
+          reset();
         },
       }
     );

@@ -1,23 +1,54 @@
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
+import { Cancel } from '@mui/icons-material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import React, { FC } from 'react';
-
-import { useStyles } from './styles';
 
 import { ITag } from 'types/tag';
 
 interface ITagsItemProps {
   tag: ITag;
+  onDelete?: () => void;
 }
 
-const TagItem: FC<ITagsItemProps> = ({ tag }) => {
-  const classes = useStyles();
-
-  return (
-    <Box className={classes.tagWrapper}>
-      <Typography className={classes.tagTitle}>{tag.title}</Typography>
-    </Box>
-  );
-};
+const TagItem: FC<ITagsItemProps> = ({ tag, onDelete }) => (
+  <Box
+    sx={{
+      maxHeight: 40,
+      padding: theme => theme.spacing(0.625, 2),
+      backgroundColor: '#f5f5f5',
+      borderRadius: 5,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      cursor: 'default',
+      margin: '0 5px',
+      marginBottom: 1.25,
+    }}
+  >
+    <Typography
+      sx={{
+        fontSize: 14,
+        lineHeight: '14px',
+      }}
+    >
+      {tag.title}
+    </Typography>
+    {onDelete && (
+      <Box display="flex" onClick={onDelete}>
+        <Cancel
+          sx={{
+            fontSize: 20,
+            color: '#838383',
+            marginLeft: 0.625,
+            cursor: 'pointer',
+            '&:hover': {
+              color: '#595959',
+            },
+          }}
+        />
+      </Box>
+    )}
+  </Box>
+);
 
 export default TagItem;

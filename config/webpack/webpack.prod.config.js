@@ -1,7 +1,8 @@
 const path = require('path');
-const webpack = require('webpack');
-const addReactDisplayname = require('babel-plugin-add-react-displayname');
+
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const webpack = require('webpack');
+
 const commonConfig = require('./webpack.common.js');
 
 module.exports = {
@@ -20,6 +21,5 @@ module.exports = {
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
     }),
-    addReactDisplayname,
   ],
 };
