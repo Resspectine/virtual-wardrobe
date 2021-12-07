@@ -3,18 +3,18 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Popover from '@mui/material/Popover';
 import { Theme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import Garment from './components/Garment';
 import { useMain } from './hooks';
 
 const Main: FC = () => {
-  const { data, hold, onClick, isOpened, setIsOpened, popoverList, anchorPosition } = useMain();
+  const { data, hold, onClick, isOpened, setIsOpened, popoverList, anchorPosition, toggleFavorite } = useMain();
 
   return (
     <Box
       sx={{
-        margin: '0 -15px',
+        margin: '0 -15px -15px',
         display: 'flex',
         flexWrap: 'wrap',
       }}
@@ -48,7 +48,13 @@ const Main: FC = () => {
         </ClickAwayListener>
       </Popover>
       {data?.map(garment => (
-        <Garment key={garment.id} garment={garment} onClick={(): void => onClick(garment.id)} {...hold(garment.id)} />
+        <Garment
+          key={garment.id}
+          garment={garment}
+          onClick={(): void => onClick(garment.id)}
+          toggleFavorite={toggleFavorite}
+          {...hold(garment.id)}
+        />
       ))}
     </Box>
   );

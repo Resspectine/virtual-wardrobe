@@ -1,10 +1,10 @@
 import Close from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
-import { ICreateClothesValues } from 'pages/CreateClothes';
+import { ICreateClothesValues } from 'pages/CreateGarment';
 
 export interface IFileUpload {
   register: UseFormRegister<ICreateClothesValues>;

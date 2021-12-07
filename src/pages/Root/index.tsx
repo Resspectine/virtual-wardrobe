@@ -1,7 +1,7 @@
 import { CssBaseline } from '@mui/material';
 import { Theme } from '@mui/system';
 import Box from '@mui/system/Box';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Switch } from 'react-router-dom';
 
 import SideNavigation from './components/SideNavigation';

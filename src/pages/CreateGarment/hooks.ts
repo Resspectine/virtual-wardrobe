@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
@@ -8,6 +8,8 @@ import { createGarment, editGarment, getGarmentById } from './mock';
 
 import { ICreateClothesValues } from '.';
 
+import { AnyTag, isCustomTag } from 'components/Autocomplete';
+import { loadTags } from 'pages/TagsList/mock';
 import { ROUTE_PATHS } from 'routes/constants';
 
 interface ISendGarment {
@@ -18,11 +20,11 @@ interface ISendGarment {
 export const useCreateClothes = () => {
   const history = useHistory();
   const { id } = useParams<{ id: string }>();
+  const { data: tags } = useQuery('tags', loadTags);
   const { mutate, status } = useMutation(createGarment);
   const { mutate: editGarmentMutate } = useMutation(editGarment);
   const { data } = useQuery(['garments', id], () => getGarmentById(id));
-
-  console.log(data);
+  const [autocompleteValue, autocompleteSetValue] = useState<AnyTag[]>([]);
 
   const { control, handleSubmit, watch, register, setValue } = useForm<ICreateClothesValues>({
     defaultValues: {
@@ -51,6 +53,14 @@ export const useCreateClothes = () => {
         imageUrl,
         wearingAmount: data?.wearingAmount || 0,
         isFavorite: data?.isFavorite || false,
+        tags: autocompleteValue.map(tag =>
+          isCustomTag(tag)
+            ? {
+                id: '',
+                title: tag.inputValue,
+              }
+            : tag
+        ),
       },
       {
         onSuccess: () => {
@@ -91,11 +101,14 @@ export const useCreateClothes = () => {
   });
 
   return {
+    tags,
     status,
     control,
     onSubmit,
     watch,
     register,
     setValue,
+    autocompleteValue,
+    autocompleteSetValue,
   };
 };

@@ -1,4 +1,6 @@
-import { getGarment, setGarment, updateGarment } from 'localStorage';
+import { v4 } from 'uuid';
+
+import { createTag, getGarment, setGarment, updateGarment } from 'localStorage';
 import { IGarment } from 'types/garment';
 
 const validateGarment = (garment: IGarment): boolean => !!garment.description && !!garment.price && !!garment.title;
@@ -6,6 +8,10 @@ const validateGarment = (garment: IGarment): boolean => !!garment.description &&
 export const createGarment = (garment: IGarment): Promise<void> => {
   if (!validateGarment(garment)) {
     return new Promise((_, reject) => reject());
+  }
+
+  if (garment.tags.some(({ id }) => !id)) {
+    garment.tags.filter(({ id }) => !id).forEach(tag => createTag({ ...tag, id: v4() }));
   }
 
   setGarment(garment);

@@ -1,11 +1,12 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { getFormFieldConfigurations } from './helpers';
 import { useCreateClothes } from './hooks';
 
+import Autocomplete from 'components/Autocomplete';
 import ControlledTextField from 'components/ControlledTextField';
 import FileUpload from 'components/FileUpload';
 import FormSubmitStatus from 'components/FormSubmitStatus';
@@ -18,8 +19,9 @@ export interface ICreateClothesValues {
   image: File[];
 }
 
-const CreateClothes: FC = () => {
-  const { status, control, onSubmit, watch, register, setValue } = useCreateClothes();
+const CreateGarment: FC = () => {
+  const { status, control, onSubmit, watch, register, setValue, autocompleteSetValue, autocompleteValue, tags } =
+    useCreateClothes();
 
   return (
     <Box>
@@ -45,6 +47,7 @@ const CreateClothes: FC = () => {
             }}
           />
         ))}
+        {tags && <Autocomplete autocompleteOptions={tags} setValue={autocompleteSetValue} value={autocompleteValue} />}
         <FileUpload register={register} name="image" file={watch('image')[0]} setValue={setValue} />
         <FormSubmitStatus status={status} />
         <Button
@@ -63,4 +66,4 @@ const CreateClothes: FC = () => {
   );
 };
 
-export default CreateClothes;
+export default CreateGarment;

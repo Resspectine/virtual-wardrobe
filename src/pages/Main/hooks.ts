@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
@@ -63,10 +63,6 @@ export const useMain = () => {
 
   const popoverList = [
     {
-      onClick: (): void => mutateFavorite(activeGarmentId),
-      children: 'Toggle favorite',
-    },
-    {
       onClick: (): void => history.push(ROUTE_PATHS.editGarment(activeGarmentId)),
       children: 'Edit',
     },
@@ -89,6 +85,7 @@ export const useMain = () => {
       },
     200
   );
+  const toggleFavorite = useCallback((garmentId: string): void => mutateFavorite(garmentId), []);
 
   return {
     data,
@@ -97,6 +94,7 @@ export const useMain = () => {
     isOpened,
     setIsOpened,
     popoverList,
+    toggleFavorite,
     anchorPosition,
   };
 };

@@ -1,5 +1,5 @@
 import { InputProps } from '@mui/material/Input';
-import React, { ComponentType, useRef, useEffect, ChangeEvent, useMemo } from 'react';
+import { ComponentType, useRef, useEffect, ChangeEvent, useMemo } from 'react';
 import { v4 } from 'uuid';
 
 export interface IWithLocalStorageProps {
@@ -8,7 +8,7 @@ export interface IWithLocalStorageProps {
 
 export function wrappedWithLocalStorage<P extends InputProps>(WrappedComponent: ComponentType<P>) {
   return (wrappedComponentProps: P & IWithLocalStorageProps): JSX.Element | null => {
-    const { localStorageKey, value } = wrappedComponentProps;
+    const { localStorageKey, value, onChange } = wrappedComponentProps;
     const userBasedKey = `${v4()}.${localStorageKey}`;
     const getValueFromStore = () => localStorage.getItem(userBasedKey) || `${value}` || '';
 
@@ -31,8 +31,8 @@ export function wrappedWithLocalStorage<P extends InputProps>(WrappedComponent: 
       if (isFirst.current) {
         isFirst.current = false;
 
-        if (wrappedComponentProps.onChange) {
-          wrappedComponentProps.onChange({
+        if (onChange) {
+          onChange({
             preventDefault: () => {},
             target: {
               value: getValueFromStore(),

@@ -2,7 +2,7 @@ import { RouteProps } from 'react-router';
 
 import { ROUTE_PATHS } from './constants';
 
-import CreateClothes from 'pages/CreateClothes';
+import CreateGarment from 'pages/CreateGarment';
 import Main from 'pages/Main';
 import TagsList from 'pages/TagsList';
 
@@ -13,13 +13,13 @@ export interface IRoute extends RouteProps {
 const routes: IRoute[] = [
   {
     path: ROUTE_PATHS.createGarment,
-    component: CreateClothes,
+    component: CreateGarment,
     exact: true,
     requiresAuthentication: false,
   },
   {
     path: ROUTE_PATHS.editGarment(),
-    component: CreateClothes,
+    component: CreateGarment,
     exact: true,
     requiresAuthentication: false,
   },
@@ -37,7 +37,7 @@ const routes: IRoute[] = [
   },
   {
     path: ROUTE_PATHS[404],
-    component: CreateClothes,
+    component: CreateGarment,
     exact: true,
     requiresAuthentication: false,
   },

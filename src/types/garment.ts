@@ -1,3 +1,5 @@
+import { ITag } from './tag';
+
 export interface IGarment {
   id: string;
   title: string;
@@ -6,4 +8,5 @@ export interface IGarment {
   imageUrl: string;
   wearingAmount: number;
   isFavorite: boolean;
+  tags: ITag[];
 }

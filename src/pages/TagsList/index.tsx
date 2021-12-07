@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import NewTag from './components/NewTag';
 import TagItem from './components/TagItem';

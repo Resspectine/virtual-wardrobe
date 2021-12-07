@@ -1,5 +1,4 @@
 import { createBrowserHistory } from 'history';
-import React from 'react';
 import ReactDOM from 'react-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';

@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import { Theme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import omit from 'lodash/omit';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { camelToSentenceCase } from 'lib/helpers/textTransformations';

@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import React, { forwardRef } from 'react';
+import { FC } from 'react';
 
 import { getFormFieldConfigurations } from './helpers';
 import { useNewTag } from './hooks';
@@ -17,7 +17,7 @@ export interface INewTag {
   closeModal: () => void;
 }
 
-const NewTag = forwardRef(({ closeModal }: INewTag) => {
+const NewTag: FC<INewTag> = ({ closeModal }) => {
   const { status, control, onSubmit } = useNewTag();
 
   return (
@@ -83,6 +83,6 @@ const NewTag = forwardRef(({ closeModal }: INewTag) => {
       </Box>
     </Box>
   );
-});
+};
 
 export default NewTag;

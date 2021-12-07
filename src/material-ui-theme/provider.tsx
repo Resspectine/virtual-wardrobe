@@ -1,5 +1,5 @@
 import { Theme, ThemeProvider as MaterialThemeProvider } from '@mui/material/styles';
-import React, { FC, createContext } from 'react';
+import { FC, createContext } from 'react';
 
 import { materialTheme } from 'material-ui-theme';
 

@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { SxProps, Theme } from '@mui/system';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 interface ILoadingProps {
   sxs?: { root?: SxProps<Theme>; icon?: SxProps<Theme> };

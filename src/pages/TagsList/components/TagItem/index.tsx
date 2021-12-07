@@ -1,13 +1,13 @@
 import { Cancel } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import React, { FC } from 'react';
+import { FC, MouseEventHandler } from 'react';
 
 import { ITag } from 'types/tag';
 
 interface ITagsItemProps {
   tag: ITag;
-  onDelete?: () => void;
+  onDelete?: MouseEventHandler<HTMLDivElement>;
 }
 
 const TagItem: FC<ITagsItemProps> = ({ tag, onDelete }) => (

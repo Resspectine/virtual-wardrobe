@@ -4,7 +4,7 @@
     "baseUrl": "./src",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "target": "es6",
     "lib": ["dom", "es2019", "es2020", "es2021", "esnext"],
     "strict": true,

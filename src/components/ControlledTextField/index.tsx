@@ -1,6 +1,6 @@
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import { SxProps, Theme } from '@mui/system';
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { UseControllerProps, useController, FieldValues } from 'react-hook-form';
 
 export interface IControlledTextField<T extends FieldValues> {
