@@ -20,7 +20,7 @@ export interface ICreateClothesValues {
 }
 
 const CreateGarment: FC = () => {
-  const { status, control, onSubmit, watch, register, setValue, autocompleteSetValue, autocompleteValue, tags } =
+  const { status, control, onSubmit, watch, register, setValue, setAutocompleteValue, autocompleteValue, tags } =
     useCreateClothes();
 
   return (
@@ -32,7 +32,7 @@ const CreateGarment: FC = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
+          alignItems: 'flex-start',
         }}
       >
         {getFormFieldConfigurations(control, watch).map((props, index) => (
@@ -42,13 +42,19 @@ const CreateGarment: FC = () => {
             sx={{
               '&.MuiTextField-root': {
                 marginBottom: 1.25,
-                width: '100%',
+                width: '50%',
               },
             }}
           />
         ))}
-        {tags && <Autocomplete autocompleteOptions={tags} setValue={autocompleteSetValue} value={autocompleteValue} />}
-        <FileUpload register={register} name="image" file={watch('image')[0]} setValue={setValue} />
+        {tags && <Autocomplete autocompleteOptions={tags} setValue={setAutocompleteValue} value={autocompleteValue} />}
+        <FileUpload
+          register={register}
+          name="image"
+          file={watch('image')[0]}
+          setValue={setValue}
+          disabled={!!watch('imageUrl')}
+        />
         <FormSubmitStatus status={status} />
         <Button
           type="submit"

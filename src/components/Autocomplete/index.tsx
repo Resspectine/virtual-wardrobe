@@ -61,11 +61,10 @@ const CustomAutocomplete: FC<ICustomAutocompleteProps> = ({ autocompleteOptions,
     }}
     renderOption={(props, option): ReactNode => <li {...props}>{option.title}</li>}
     sx={{
-      width: '100%',
+      width: '50%',
       margin: '10px 0',
     }}
     freeSolo
-    clearOnBlur
     renderInput={(params): ReactNode => (
       <TextField
         {...params}
@@ -74,9 +73,9 @@ const CustomAutocomplete: FC<ICustomAutocompleteProps> = ({ autocompleteOptions,
         }}
         InputLabelProps={{
           sx: {
-            transform: 'translate(14px, 8px) scale(1)',
+            transform: (!value.length && 'translate(14px, 10px) scale(1)') || undefined,
             '&.Mui-focused': {
-              transform: 'translate(14px, -9px) scale(0.75)',
+              transform: (!value.length && 'translate(14px, -9px) scale(0.75)') || undefined,
             },
           },
         }}
@@ -84,7 +83,7 @@ const CustomAutocomplete: FC<ICustomAutocompleteProps> = ({ autocompleteOptions,
           ...params.InputProps,
           sx: {
             '&.MuiOutlinedInput-root': {
-              padding: 0,
+              padding: 0.5,
             },
           },
         }}

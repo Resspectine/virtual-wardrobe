@@ -11,9 +11,10 @@ export interface IFileUpload {
   name: keyof ICreateClothesValues;
   file: File;
   setValue: UseFormSetValue<ICreateClothesValues>;
+  disabled?: boolean;
 }
 
-const FileUpload: FC<IFileUpload> = ({ register, name, file, setValue }) => {
+const FileUpload: FC<IFileUpload> = ({ register, name, file, setValue, disabled }) => {
   const [fileUrl, setFileUrl] = useState<string | null>(null);
 
   useEffect(() => {
@@ -58,7 +59,7 @@ const FileUpload: FC<IFileUpload> = ({ register, name, file, setValue }) => {
       </Box>
     </Box>
   ) : (
-    <Button variant="outlined" component="label">
+    <Button variant="outlined" component="label" disabled={disabled}>
       Upload File
       <input type="file" hidden {...register(name)} />
     </Button>

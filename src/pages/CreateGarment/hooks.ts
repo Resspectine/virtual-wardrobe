@@ -24,7 +24,7 @@ export const useCreateClothes = () => {
   const { mutate, status } = useMutation(createGarment);
   const { mutate: editGarmentMutate } = useMutation(editGarment);
   const { data } = useQuery(['garments', id], () => getGarmentById(id));
-  const [autocompleteValue, autocompleteSetValue] = useState<AnyTag[]>([]);
+  const [autocompleteValue, setAutocompleteValue] = useState<AnyTag[]>([]);
 
   const { control, handleSubmit, watch, register, setValue } = useForm<ICreateClothesValues>({
     defaultValues: {
@@ -42,6 +42,7 @@ export const useCreateClothes = () => {
       setValue('imageUrl', data.imageUrl);
       setValue('price', data.price);
       setValue('title', data.title);
+      setAutocompleteValue(data.tags);
     }
   }, [data]);
 
@@ -109,6 +110,6 @@ export const useCreateClothes = () => {
     register,
     setValue,
     autocompleteValue,
-    autocompleteSetValue,
+    setAutocompleteValue,
   };
 };

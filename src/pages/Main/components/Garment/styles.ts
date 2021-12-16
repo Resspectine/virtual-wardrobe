@@ -26,4 +26,5 @@ export const garmentWrapper: SxProps<Theme> = theme => ({
 export const image: SxProps<Theme> = {
   width: '100%',
   height: 'auto',
+  minHeight: 400,
 };

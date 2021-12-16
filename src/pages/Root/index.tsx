@@ -4,7 +4,7 @@ import Box from '@mui/system/Box';
 import { FC } from 'react';
 import { Switch } from 'react-router-dom';
 
-import SideNavigation from './components/SideNavigation';
+import Navigation from './components/Navigation';
 import { renderRoutes } from './helpers';
 import { useRoot } from './hooks';
 
@@ -39,12 +39,10 @@ const Root: FC = () => {
           marginRight: 'auto',
           marginLeft: 'auto',
         },
-        display: 'flex',
-        alignItems: 'flex-start',
       })}
     >
       <CssBaseline />
-      <SideNavigation />
+      <Navigation />
       <Box
         sx={{
           backgroundColor: (theme: Theme) => theme.palette.background.paper,

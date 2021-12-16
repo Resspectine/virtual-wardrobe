@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
@@ -20,13 +21,15 @@ const queryClient = new QueryClient();
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
-      <ThemeProvider>
-        <QueryClientProvider client={queryClient}>
-          <Root />
-        </QueryClientProvider>
-      </ThemeProvider>
-    </Router>
+    <RecoilRoot>
+      <Router history={history}>
+        <ThemeProvider>
+          <QueryClientProvider client={queryClient}>
+            <Root />
+          </QueryClientProvider>
+        </ThemeProvider>
+      </Router>
+    </RecoilRoot>
   </Provider>,
   document.getElementById('app')
 );

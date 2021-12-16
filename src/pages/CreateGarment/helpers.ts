@@ -18,7 +18,7 @@ export const getFormFieldConfigurations = (
     },
     textFieldProps: {
       label: 'Title',
-      variant: 'standard',
+      variant: 'outlined',
       type: 'text',
     },
   },
@@ -32,7 +32,7 @@ export const getFormFieldConfigurations = (
     },
     textFieldProps: {
       label: 'Description',
-      variant: 'standard',
+      variant: 'outlined',
       type: 'text',
     },
   },
@@ -46,7 +46,7 @@ export const getFormFieldConfigurations = (
     },
     textFieldProps: {
       label: 'Price',
-      variant: 'standard',
+      variant: 'outlined',
       type: 'number',
     },
   },
@@ -57,7 +57,7 @@ export const getFormFieldConfigurations = (
     },
     textFieldProps: {
       label: 'Image',
-      variant: 'standard',
+      variant: 'outlined',
       type: 'text',
       disabled: !!watch('image')[0],
     },
