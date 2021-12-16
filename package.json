@@ -1,5 +1,5 @@
 {
-  "name": "welmed-frontend",
+  "name": "virtual-wardrobe",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -28,12 +28,9 @@
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.17.1",
     "react-query": "^3.25.1",
-    "react-redux": "^7.2.4",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "recoil": "^0.5.2",
-    "redux": "^4.1.1",
-    "redux-thunk": "^2.3.0",
     "regenerator-runtime": "^0.13.9",
     "reselect": "^4.0.0",
     "stream-browserify": "^3.0.0",
@@ -55,7 +52,6 @@
     "@types/react-avatar-editor": "^10.3.5",
     "@types/react-dom": "^16.9.8",
     "@types/react-flatpickr": "^3.8.3",
-    "@types/react-redux": "^7.1.16",
     "@types/react-router": "^5.1.14",
     "@types/react-router-dom": "^5.1.7",
     "@types/react-text-mask": "^5.4.9",
