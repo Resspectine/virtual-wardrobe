@@ -1,51 +1,29 @@
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { SystemStyleObject } from '@mui/system';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC } from 'react';
 
 import { TEXT_BY_STATUS } from './constants';
-import { styles } from './styles';
+import { useFormSubmitStatusControl } from './hooks';
+import { FormSubmitStatusWrapper } from './styled';
 
-type SetTimeoutReturnType = ReturnType<typeof setTimeout>;
+export type FormStatus = 'error' | 'idle' | 'loading' | 'success';
 
 export interface IFormSubmitStatus {
-  status: 'error' | 'idle' | 'loading' | 'success';
+  status: FormStatus;
 }
 
 const FormSubmitStatus: FC<IFormSubmitStatus> = ({ status }) => {
-  const timeoutRef = useRef<SetTimeoutReturnType>();
-  const [isVisible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (status !== 'idle') {
-      setVisible(true);
-      timeoutRef.current = setTimeout(() => {
-        setVisible(false);
-      }, 2000);
-    }
-
-    return (): void => {
-      clearTimeout(timeoutRef.current as SetTimeoutReturnType);
-    };
-  }, [status]);
+  const { isVisible } = useFormSubmitStatusControl({
+    status,
+  });
 
   if (status === 'idle' || !isVisible) {
     return null;
   }
 
   return (
-    <Box
-      sx={(theme): SystemStyleObject => ({
-        padding: '5px 10px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 2,
-        ...styles(theme)[status],
-      })}
-    >
+    <FormSubmitStatusWrapper status={status}>
       <Typography>{TEXT_BY_STATUS[status]}</Typography>
-    </Box>
+    </FormSubmitStatusWrapper>
   );
 };
 

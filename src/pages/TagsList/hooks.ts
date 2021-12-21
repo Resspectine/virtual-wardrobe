@@ -9,10 +9,16 @@ export const useTagsList = () => {
   const { data } = useQuery('tags', loadTags);
   const { mutate } = useMutation(removeTag);
 
+  const onDelete = (id: string) => () =>
+    mutate(id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries('tags');
+      },
+    });
+
   return {
     data,
-    mutate,
-    queryClient,
+    onDelete,
     isModalOpened,
     setIsModalOpened,
   };

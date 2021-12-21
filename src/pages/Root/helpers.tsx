@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom';
 
-import AuthorizedRoute from './components/AuthorizedRoute';
+import { AuthorizedRoute } from './Components';
 
 import routes from 'routes';
 

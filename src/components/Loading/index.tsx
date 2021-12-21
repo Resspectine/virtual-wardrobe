@@ -3,6 +3,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { SxProps, Theme } from '@mui/system';
 import { FC } from 'react';
 
+import { LoadingWrapper } from './styled';
+
 interface ILoadingProps {
   sxs?: { root?: SxProps<Theme>; icon?: SxProps<Theme> };
 }
@@ -13,15 +15,8 @@ interface ILoadingWithShadowProps {
 }
 
 const Loading: FC<ILoadingProps> = ({ sxs }) => (
-  <Box
+  <LoadingWrapper
     sx={{
-      width: '100%',
-      height: '100%',
-      top: 0,
-      left: 0,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
       ...sxs?.root,
     }}
   >
@@ -30,7 +25,7 @@ const Loading: FC<ILoadingProps> = ({ sxs }) => (
         ...sxs?.icon,
       }}
     />
-  </Box>
+  </LoadingWrapper>
 );
 
 export const LoadingWithShadow: FC<ILoadingWithShadowProps> = ({ children, loading, sxs }) => (

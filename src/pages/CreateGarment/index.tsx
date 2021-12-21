@@ -1,13 +1,12 @@
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 
 import { getFormFieldConfigurations } from './helpers';
 import { useCreateClothes } from './hooks';
+import { CreateGarmentForm, CreateGarmentSubmit, CreateGarmentTextField } from './styled';
 
 import Autocomplete from 'components/Autocomplete';
-import ControlledTextField from 'components/ControlledTextField';
 import FileUpload from 'components/FileUpload';
 import FormSubmitStatus from 'components/FormSubmitStatus';
 
@@ -26,26 +25,9 @@ const CreateGarment: FC = () => {
   return (
     <Box>
       <Typography>Create clothes</Typography>
-      <Box
-        component="form"
-        onSubmit={onSubmit}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-        }}
-      >
+      <CreateGarmentForm component="form" onSubmit={onSubmit}>
         {getFormFieldConfigurations(control, watch).map((props, index) => (
-          <ControlledTextField
-            {...props}
-            key={index}
-            sx={{
-              '&.MuiTextField-root': {
-                marginBottom: 1.25,
-                width: '50%',
-              },
-            }}
-          />
+          <CreateGarmentTextField {...props} key={index} />
         ))}
         {tags && <Autocomplete autocompleteOptions={tags} setValue={setAutocompleteValue} value={autocompleteValue} />}
         <FileUpload
@@ -56,18 +38,10 @@ const CreateGarment: FC = () => {
           disabled={!!watch('imageUrl')}
         />
         <FormSubmitStatus status={status} />
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          sx={{
-            marginTop: 1.25,
-            color: '#fff',
-          }}
-        >
+        <CreateGarmentSubmit type="submit" variant="contained" color="primary">
           Submit
-        </Button>
-      </Box>
+        </CreateGarmentSubmit>
+      </CreateGarmentForm>
     </Box>
   );
 };

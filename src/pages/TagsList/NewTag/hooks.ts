@@ -4,28 +4,35 @@ import { v4 } from 'uuid';
 
 import { createNewTag } from './mock';
 
-import { INewTagValues } from '.';
+import { INewTag, INewTagValues } from '.';
 
-export const useNewTag = () => {
+export const useNewTag = ({ closeModal }: INewTag) => {
   const queryClient = useQueryClient();
   const { mutate, status } = useMutation(createNewTag);
 
-  const { control, handleSubmit, reset } = useForm<INewTagValues>({
+  const { control, handleSubmit, reset, register } = useForm<INewTagValues>({
     defaultValues: {
       title: '',
+      addMore: false,
     },
   });
 
   const onSubmit = handleSubmit(values => {
+    const { addMore, ...restValues } = values;
+
     mutate(
       {
-        ...values,
+        ...restValues,
         id: v4(),
       },
       {
         onSuccess: () => {
           queryClient.invalidateQueries('tags');
           reset();
+
+          if (!addMore) {
+            closeModal();
+          }
         },
       }
     );
@@ -34,6 +41,7 @@ export const useNewTag = () => {
   return {
     status,
     control,
+    register,
     onSubmit,
   };
 };

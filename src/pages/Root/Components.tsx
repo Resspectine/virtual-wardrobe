@@ -5,6 +5,4 @@ import { IRoute } from 'routes';
 
 type AuthorizedRouteProps = RouteProps & Omit<IRoute, 'requiresAuthentication'>;
 
-const AuthorizedRoute: FC<AuthorizedRouteProps> = routeProps => <Route {...routeProps} />;
-
-export default AuthorizedRoute;
+export const AuthorizedRoute: FC<AuthorizedRouteProps> = routeProps => <Route {...routeProps} />;

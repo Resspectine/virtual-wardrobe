@@ -1,48 +1,22 @@
 import Box from '@mui/material/Box';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Popover from '@mui/material/Popover';
-import { Theme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 
-import Garment from './components/Garment';
+import Garment from './Garment';
 import { useMain } from './hooks';
+import { MainListItem, MainWrapper } from './styled';
 
 const Main: FC = () => {
   const { data, hold, onClick, isOpened, setIsOpened, popoverList, anchorPosition, toggleFavorite } = useMain();
 
   return (
-    <Box
-      sx={{
-        margin: '0 -15px -15px',
-        display: 'flex',
-        flexWrap: 'wrap',
-      }}
-    >
+    <MainWrapper>
       <Popover anchorReference="anchorPosition" anchorPosition={anchorPosition} open={isOpened}>
         <ClickAwayListener onClickAway={(): void => setIsOpened(false)} mouseEvent="onMouseDown">
-          <Box
-            sx={{
-              padding: '5px',
-            }}
-          >
+          <Box p={0.625}>
             {popoverList.map((listItem, index) => (
-              <Typography
-                sx={{
-                  cursor: 'pointer',
-                  fontSize: 16,
-                  padding: '0px 10px',
-                  margin: '0 -5px 5px',
-                  '&:hover': {
-                    backgroundColor: (theme: Theme) => theme.palette.background.default,
-                  },
-                  '&:last-child': {
-                    marginBottom: 0,
-                  },
-                }}
-                key={index}
-                {...listItem}
-              />
+              <MainListItem key={index} {...listItem} />
             ))}
           </Box>
         </ClickAwayListener>
@@ -56,7 +30,7 @@ const Main: FC = () => {
           {...hold(garment.id)}
         />
       ))}
-    </Box>
+    </MainWrapper>
   );
 };
 

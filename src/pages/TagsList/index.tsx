@@ -3,12 +3,14 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { FC } from 'react';
 
-import NewTag from './components/NewTag';
-import TagItem from './components/TagItem';
 import { useTagsList } from './hooks';
+import NewTag from './NewTag';
+import { TagsWrapper } from './styled';
+
+import TagItem from 'components/TagItem';
 
 const TagsList: FC = () => {
-  const { data, mutate, queryClient, isModalOpened, setIsModalOpened } = useTagsList();
+  const { data, isModalOpened, setIsModalOpened, onDelete } = useTagsList();
 
   return (
     <Box>
@@ -20,21 +22,11 @@ const TagsList: FC = () => {
           Add new tag
         </Button>
       </Box>
-      <Box display="flex" mt={2} ml={-0.625} mr={-0.625} mb={-1.25} flexWrap="wrap">
+      <TagsWrapper>
         {data?.map(tag => (
-          <TagItem
-            tag={tag}
-            key={tag.id}
-            onDelete={(): void =>
-              mutate(tag.id, {
-                onSuccess: () => {
-                  queryClient.invalidateQueries('tags');
-                },
-              })
-            }
-          />
+          <TagItem tag={tag} key={tag.id} onDelete={onDelete} />
         ))}
-      </Box>
+      </TagsWrapper>
     </Box>
   );
 };
