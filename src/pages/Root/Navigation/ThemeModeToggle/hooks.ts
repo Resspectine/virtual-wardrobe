@@ -1,10 +1,7 @@
-import { useSetRecoilState } from 'recoil';
-
-import { newThemeMode } from 'material-ui-theme';
-import { themeModeState } from 'material-ui-theme/provider';
+import { useStore } from 'store';
 
 export const useThemeModeToggleControl = () => {
-  const changeThemeMode = useSetRecoilState(themeModeState);
+  const changeThemeMode = useStore(state => state.toggleThemeMode);
 
-  return { onToggleButtonClick: (): void => changeThemeMode(oldMode => newThemeMode[oldMode]) };
+  return { onToggleButtonClick: changeThemeMode };
 };

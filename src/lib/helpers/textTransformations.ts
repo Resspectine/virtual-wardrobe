@@ -3,3 +3,5 @@ export const camelToSentenceCase = (text: string): string => {
 
   return result.charAt(0).toUpperCase() + result.slice(1);
 };
+
+export const sleep = (timeout: number): Promise<void> => new Promise(resolve => setTimeout(() => resolve(), timeout));

@@ -1,10 +1,10 @@
+import { omit } from 'lodash';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-import { v4 } from 'uuid';
 
-import { createGarment, editGarment, getGarmentById } from './mock';
+import { createGarment, getGarmentById } from './mock';
 
 import { ICreateClothesValues } from '.';
 
@@ -22,7 +22,7 @@ export const useCreateClothes = () => {
   const { id } = useParams<{ id: string }>();
   const { data: tags } = useQuery('tags', loadTags);
   const { mutate, status } = useMutation(createGarment);
-  const { mutate: editGarmentMutate } = useMutation(editGarment);
+  // const { mutate: editGarmentMutate } = useMutation(editGarment);
   const { data } = useQuery(['garments', id], () => getGarmentById(id));
   const [autocompleteValue, setAutocompleteValue] = useState<AnyTag[]>([]);
 
@@ -42,25 +42,26 @@ export const useCreateClothes = () => {
       setValue('imageUrl', data.imageUrl);
       setValue('price', data.price);
       setValue('title', data.title);
-      setAutocompleteValue(data.tags);
+
+      if (data.tags) {
+        setAutocompleteValue(data.tags);
+      }
     }
   }, [data]);
 
   const sendGarment = ({ imageUrl, values }: ISendGarment) =>
-    (data ? editGarmentMutate : mutate)(
+    mutate(
       {
         ...values,
-        id: data?.id || v4(),
         imageUrl,
         wearingAmount: data?.wearingAmount || 0,
         isFavorite: data?.isFavorite || false,
         tags: autocompleteValue.map(tag =>
           isCustomTag(tag)
             ? {
-                id: '',
                 title: tag.inputValue,
               }
-            : tag
+            : omit(tag, 'id')
         ),
       },
       {

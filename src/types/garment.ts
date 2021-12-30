@@ -8,5 +8,5 @@ export interface IGarment {
   imageUrl: string;
   wearingAmount: number;
   isFavorite: boolean;
-  tags: ITag[];
+  tags?: ITag[];
 }

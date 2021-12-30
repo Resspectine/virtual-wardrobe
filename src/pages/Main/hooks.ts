@@ -1,6 +1,10 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useCallback, useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router-dom';
+
+// import Worker from '../../lib/workers/test.worker';
+// import WorkerBuilder from '../../lib/workers/worker-builder';
 
 import { loadGarments, removeGarment, triggerFavorite, wearGarment } from './mock';
 
@@ -11,6 +15,7 @@ import { IGarment } from 'types/garment';
 
 export const useMain = () => {
   const history = useHistory();
+  // const workerRef = useRef<Worker | undefined>(undefined);
   const queryClient = useQueryClient();
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [activeGarmentId, setActiveGarmentId] = useState<string>('');
@@ -19,7 +24,7 @@ export const useMain = () => {
     top: 0,
   });
   const { data } = useQuery('garments', loadGarments);
-  const { mutate } = useMutation<void, Error, string, { previousGarments: IGarment[] }>(wearGarment, {
+  const { mutate } = useMutation<Response, Error, string, { previousGarments: IGarment[] }>(wearGarment, {
     onMutate: async garmentId => {
       await queryClient.cancelQueries('garments');
       const previousGarments = queryClient.getQueryData<IGarment[]>('garments');
@@ -42,6 +47,10 @@ export const useMain = () => {
       }
     },
   });
+
+  // useEffect(() => {
+  //   workerRef.current = new WorkerBuilder(Worker);
+  // }, []);
 
   const { mutate: mutateFavorite } = useMutation(triggerFavorite, {
     onSettled: () => {
@@ -82,6 +91,10 @@ export const useMain = () => {
         });
         setIsOpened(true);
         setActiveGarmentId(garmentId);
+
+        // if (workerRef.current) {
+        //   workerRef.current.postMessage(2500000000);
+        // }
       },
     200
   );

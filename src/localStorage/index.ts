@@ -30,8 +30,8 @@ export const updateFavoriteStatus = (garmentId: string): void =>
     )
   );
 
-export const updateGarment = (newGarment: IGarment): void =>
-  setGarments((getGarments() || []).map(garment => (garment.id === newGarment.id ? newGarment : garment)));
+// export const updateGarment = (newGarment: IGarment): void =>
+//   setGarments((getGarments() || []).map(garment => (garment.id === newGarment.id ? newGarment : garment)));
 
 export const setTags = (tags: ITag[]): void => localStorage.setItem(KEYS.TAGS_COLLECTION, JSON.stringify(tags));
 

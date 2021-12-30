@@ -8,7 +8,7 @@ const print = (value: any): string => {
   return value.toString();
 };
 
-export const useLogIfChanged = <T>(name: string, value: T): void => {
+export const useLogIfChanged = <T>(name: string, value: T): number => {
   const previous = useRef(value);
   const renderCount = useRef(1);
 
@@ -20,4 +20,6 @@ export const useLogIfChanged = <T>(name: string, value: T): void => {
     previous.current = value;
     renderCount.current += 1;
   }
+
+  return renderCount.current;
 };

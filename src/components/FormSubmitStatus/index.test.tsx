@@ -7,19 +7,19 @@ describe('FormSubmitSection', () => {
   test('should be success', () => {
     render(<FormSubmitStatus status="success" />);
 
-    expect(screen.getByText(/Success!/i).parentElement).toHaveClass('makeStyles-success-4');
+    expect(screen.getByText(/Success!/i).parentElement).toHaveClass('css-13njhw3');
   });
 
   test('should be error', () => {
     render(<FormSubmitStatus status="error" />);
 
-    expect(screen.getByText(/error/i).parentElement).toHaveClass('makeStyles-error-7');
+    expect(screen.getByText(/error/i).parentElement).toHaveClass('css-aa0k3h');
   });
 
   test('should be loading', () => {
     render(<FormSubmitStatus status="loading" />);
 
-    expect(screen.getByText(/sending/i).parentElement).toHaveClass('makeStyles-loading-13');
+    expect(screen.getByText(/sending/i).parentElement).toHaveClass('css-17beqbb');
   });
 
   test('should be null', () => {

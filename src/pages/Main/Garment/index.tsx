@@ -20,28 +20,14 @@ const Garment: FC<IGarmentProps> = ({
   toggleFavorite,
   ...hold
 }) => (
-  <GarmentWrapper
-    onClick={onClick}
-    {...hold}
-    sx={
-      {
-        // width: {
-        //   xs: 'calc(100% - 30px)',
-        //   sm: 'calc(100% - 30px)',
-        //   md: 'calc(50% - 30px)',
-        //   lg: 'calc(100% / 3 - 30px)',
-        //   xl: 'calc(25% - 30px)',
-        // },
-      }
-    }
-  >
+  <GarmentWrapper onClick={onClick} {...hold}>
     <StarButton id={id} isFavorite={isFavorite} toggleFavorite={toggleFavorite} />
     <Box>
       <ImageSection imageUrl={imageUrl} />
       <DataSection description={description} title={title} />
     </Box>
     <Box display="flex" mx={-0.625}>
-      {tags.map(tag => (
+      {tags?.map(tag => (
         <TagItem tag={tag} key={tag.id} />
       ))}
     </Box>

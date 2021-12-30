@@ -1,29 +1,34 @@
-import { v4 } from 'uuid';
-
-import { createTag, getGarment, setGarment, updateGarment } from 'localStorage';
+import { getGarment } from 'localStorage';
 import { IGarment } from 'types/garment';
+import { ITag } from 'types/tag';
 
-const validateGarment = (garment: IGarment): boolean => !!garment.description && !!garment.price && !!garment.title;
+export type SendRequestGarment = Omit<IGarment, 'id' | 'tags'> & { tags: Omit<ITag, 'id'>[] };
 
-export const createGarment = (garment: IGarment): Promise<void> => {
+const validateGarment = (garment: SendRequestGarment): boolean =>
+  !!garment.description && !!garment.price && !!garment.title;
+
+export const createGarment = async (garment: SendRequestGarment): Promise<void> => {
+  const headers = new Headers();
+
+  headers.append('Content-Type', 'application/json');
+
   if (!validateGarment(garment)) {
     return new Promise((_, reject) => reject());
   }
 
-  if (garment.tags.some(({ id }) => !id)) {
-    garment.tags.filter(({ id }) => !id).forEach(tag => createTag({ ...tag, id: v4() }));
-  }
-
-  setGarment(garment);
-
-  return new Promise(resolve => resolve());
+  return (
+    await fetch('http://localhost:3000/api/garment', {
+      method: 'POST',
+      body: JSON.stringify(garment),
+      headers,
+    })
+  ).json();
 };
 
 export const getGarmentById = (garmentId: string): Promise<IGarment | undefined> =>
   new Promise(resolve => resolve(getGarment(garmentId)));
 
-export const editGarment = (garment: IGarment): Promise<void> => {
-  updateGarment(garment);
+export const editGarment = (): Promise<void> =>
+  // updateGarment(garment);
 
-  return new Promise(resolve => resolve());
-};
+  new Promise(resolve => resolve());

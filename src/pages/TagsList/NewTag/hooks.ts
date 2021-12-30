@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
-import { v4 } from 'uuid';
 
 import { createNewTag } from './mock';
 
@@ -20,22 +19,16 @@ export const useNewTag = ({ closeModal }: INewTag) => {
   const onSubmit = handleSubmit(values => {
     const { addMore, ...restValues } = values;
 
-    mutate(
-      {
-        ...restValues,
-        id: v4(),
-      },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries('tags');
-          reset();
+    mutate(restValues, {
+      onSuccess: () => {
+        queryClient.invalidateQueries('tags');
+        reset();
 
-          if (!addMore) {
-            closeModal();
-          }
-        },
-      }
-    );
+        if (!addMore) {
+          closeModal();
+        }
+      },
+    });
   });
 
   return {
