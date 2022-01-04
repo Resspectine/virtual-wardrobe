@@ -1,29 +1,34 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useCallback, useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router-dom';
-
-// import Worker from '../../lib/workers/test.worker';
-// import WorkerBuilder from '../../lib/workers/worker-builder';
 
 import { loadGarments, removeGarment, triggerFavorite, wearGarment } from './mock';
 
 import { useDoubleClick } from 'lib/hooks/useDoubleClick';
 import { useHoldClick } from 'lib/hooks/useHoldClick';
+import { loadTags } from 'pages/TagsList/mock';
 import { ROUTE_PATHS } from 'routes/constants';
 import { IGarment } from 'types/garment';
 
 export const useMain = () => {
   const history = useHistory();
-  // const workerRef = useRef<Worker | undefined>(undefined);
   const queryClient = useQueryClient();
+  const [isFavoriteFirst, setFavoriteFirst] = useState<boolean>(false);
   const [isOpened, setIsOpened] = useState<boolean>(false);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [activeGarmentId, setActiveGarmentId] = useState<string>('');
   const [anchorPosition, setAnchorPosition] = useState<{ top: number; left: number }>({
     left: 0,
     top: 0,
   });
-  const { data } = useQuery('garments', loadGarments);
+  const tagsQueryParams = selectedTags.join(',');
+  const loadGarmentsQueryParams = {
+    filter: tagsQueryParams,
+    orderBy: (isFavoriteFirst && 'isFavorite') || undefined,
+    orderDirection: (isFavoriteFirst && 'DESC') || undefined,
+  };
+  const { data } = useQuery(['garments', loadGarmentsQueryParams], () => loadGarments(loadGarmentsQueryParams));
+  const { data: tagsData } = useQuery('tags', loadTags);
   const { mutate } = useMutation<Response, Error, string, { previousGarments: IGarment[] }>(wearGarment, {
     onMutate: async garmentId => {
       await queryClient.cancelQueries('garments');
@@ -47,10 +52,6 @@ export const useMain = () => {
       }
     },
   });
-
-  // useEffect(() => {
-  //   workerRef.current = new WorkerBuilder(Worker);
-  // }, []);
 
   const { mutate: mutateFavorite } = useMutation(triggerFavorite, {
     onSettled: () => {
@@ -91,10 +92,6 @@ export const useMain = () => {
         });
         setIsOpened(true);
         setActiveGarmentId(garmentId);
-
-        // if (workerRef.current) {
-        //   workerRef.current.postMessage(2500000000);
-        // }
       },
     200
   );
@@ -105,9 +102,15 @@ export const useMain = () => {
     hold,
     onClick,
     isOpened,
+    tagsData,
     setIsOpened,
     popoverList,
+    selectedTags,
     toggleFavorite,
     anchorPosition,
+    isFavoriteFirst,
+    setSelectedTags,
+    tagsQueryParams,
+    setFavoriteFirst,
   };
 };

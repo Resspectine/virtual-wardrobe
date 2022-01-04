@@ -35,3 +35,10 @@ export const MainListItem = styled(Typography)(({ theme }) => ({
     marginBottom: 0,
   },
 }));
+
+export const MainListFilterWrapper = styled(Box)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  marginBottom: 30,
+}));

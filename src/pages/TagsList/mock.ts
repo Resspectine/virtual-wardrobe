@@ -1,4 +1,3 @@
-import { deleteTag, getTags } from 'localStorage';
 import { ITag } from 'types/tag';
 
 export const loadTags = async (): Promise<ITag[]> =>
@@ -8,8 +7,9 @@ export const loadTags = async (): Promise<ITag[]> =>
     })
   ).json();
 
-export const removeTag = (tagId: string): Promise<ITag[]> => {
-  deleteTag(tagId);
-
-  return Promise.resolve(getTags() || []);
-};
+export const removeTag = async (tagId: string): Promise<ITag[]> =>
+  (
+    await fetch(`http://localhost:3000/api/tag/${tagId}`, {
+      method: 'DELETE',
+    })
+  ).json();
