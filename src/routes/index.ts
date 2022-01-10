@@ -3,6 +3,7 @@ import { RouteProps } from 'react-router';
 import { ROUTE_PATHS } from './constants';
 
 import CreateGarment from 'pages/CreateGarment';
+import Login from 'pages/Login';
 import Main from 'pages/Main';
 import TagsList from 'pages/TagsList';
 
@@ -27,11 +28,17 @@ const routes: IRoute[] = [
     path: ROUTE_PATHS.main,
     component: Main,
     exact: true,
-    requiresAuthentication: false,
+    requiresAuthentication: true,
   },
   {
     path: ROUTE_PATHS.tagsList,
     component: TagsList,
+    exact: true,
+    requiresAuthentication: false,
+  },
+  {
+    path: ROUTE_PATHS.login,
+    component: Login,
     exact: true,
     requiresAuthentication: false,
   },

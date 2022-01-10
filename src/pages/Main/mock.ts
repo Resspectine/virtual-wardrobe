@@ -1,3 +1,4 @@
+import { appFetch } from 'lib/controller';
 import { createQueryParams } from 'lib/helpers/queryParams';
 import { deleteGarment } from 'localStorage';
 import { IGarment } from 'types/garment';
@@ -12,20 +13,20 @@ export const loadGarments = async (params: LoadGarmentsQueryParams): Promise<IGa
   const queryParams = createQueryParams(params);
 
   return (
-    await fetch(`http://localhost:3000/api/garment?${queryParams}`, {
+    await appFetch(`garment?${queryParams}`, {
       method: 'GET',
     })
   ).json();
 };
 
 export const wearGarment = (garmentId: string): Promise<Response> =>
-  fetch(`http://localhost:3000/api/garment/wear/${garmentId}`, {
+  appFetch(`garment/wear/${garmentId}`, {
     method: 'PATCH',
   });
 
 export const triggerFavorite = async (garmentId: string): Promise<void> =>
   (
-    await fetch(`http://localhost:3000/api/garment/favorite/${garmentId}`, {
+    await appFetch(`garment/favorite/${garmentId}`, {
       method: 'PATCH',
     })
   ).json();

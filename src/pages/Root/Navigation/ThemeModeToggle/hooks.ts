@@ -1,7 +1,7 @@
-import { useStore } from 'store';
+import { useAppState } from 'store/appState';
 
 export const useThemeModeToggleControl = () => {
-  const changeThemeMode = useStore(state => state.toggleThemeMode);
+  const changeThemeMode = useAppState(state => state.toggleThemeMode);
 
   return { onToggleButtonClick: changeThemeMode };
 };

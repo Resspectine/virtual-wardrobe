@@ -8,12 +8,12 @@ import Navigation from './Navigation';
 import { RootWrapper, RoutesWrapper } from './styled';
 
 const Root: FC = () => {
-  useRoot();
+  const { isLoggedIn } = useRoot();
 
   return (
-    <RootWrapper>
+    <RootWrapper isLoggedIn={isLoggedIn}>
       <CssBaseline />
-      <Navigation />
+      {isLoggedIn && <Navigation />}
       <RoutesWrapper>
         <Switch>{renderRoutes()}</Switch>
       </RoutesWrapper>

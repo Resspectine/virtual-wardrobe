@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { QueryClientProvider } from 'react-query';
 import { Router } from 'react-router-dom';
 
+import { AuthenticationProvide } from 'lib/providers/Authentication';
 import { ThemeProvider } from 'material-ui-theme/provider';
 import Root from 'pages/Root';
 import queryClient from 'queryClient';
@@ -13,7 +14,9 @@ ReactDOM.render(
   <Router history={history}>
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
-        <Root />
+        <AuthenticationProvide>
+          <Root />
+        </AuthenticationProvide>
       </QueryClientProvider>
     </ThemeProvider>
   </Router>,

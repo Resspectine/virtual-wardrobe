@@ -8,6 +8,7 @@ export const NavigationWrapper = styled(Box)(({ theme }) => ({
   gap: 20,
   justifyContent: 'center',
   position: 'relative',
+  alignItems: 'center',
 }));
 
 export const NavigationLink = styled(Typography, {

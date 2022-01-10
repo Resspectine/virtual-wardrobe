@@ -8,14 +8,15 @@ interface Store {
   toggleThemeMode: () => void;
 }
 
-export const useStore = create(
+export const useAppState = create(
   persist<Store, SetState<Store>, GetState<Store>, StoreApi<Store>>(
     set => ({
       themeMode: 'green',
       toggleThemeMode: (): void => set(oldState => ({ themeMode: newThemeMode[oldState.themeMode] })),
     }),
     {
-      name: 'app-configuration',
+      name: 'app-state',
+      version: 1,
     }
   )
 );

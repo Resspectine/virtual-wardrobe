@@ -2,14 +2,14 @@ import { Theme, ThemeProvider as MaterialThemeProvider } from '@mui/material/sty
 import { FC, createContext } from 'react';
 
 import { materialTheme } from 'material-ui-theme';
-import { useStore } from 'store';
+import { useAppState } from 'store/appState';
 
 export const PortalThemeContext = createContext<{ theme: Theme | null }>({
   theme: null,
 });
 
 export const ThemeProvider: FC = ({ children }) => {
-  const themeMode = useStore(state => state.themeMode);
+  const themeMode = useAppState(state => state.themeMode);
   const theme = materialTheme(themeMode);
 
   return (
