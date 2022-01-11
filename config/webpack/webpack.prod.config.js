@@ -10,7 +10,7 @@ module.exports = {
   mode: 'production',
   entry: './src/index.tsx',
   output: {
-    filename: `main${process.env.BUILD_VCS_NUMBER}.js`,
+    filename: `main.js`,
     path: path.resolve('dist'),
   },
   optimization: {
