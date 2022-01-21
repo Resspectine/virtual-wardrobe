@@ -8,6 +8,7 @@ import { createGarment, getGarmentById } from './mock';
 
 import { ICreateClothesValues } from '.';
 
+import { useAppNotification } from 'components/AppNotification';
 import { AnyTag, isCustomTag } from 'components/Autocomplete';
 import { loadTags } from 'pages/TagsList/mock';
 import { ROUTE_PATHS } from 'routes/constants';
@@ -20,8 +21,9 @@ interface ISendGarment {
 export const useCreateClothes = () => {
   const history = useHistory();
   const { id } = useParams<{ id: string }>();
+  const addNotification = useAppNotification(state => state.addNotification);
   const { data: tags } = useQuery('tags', loadTags);
-  const { mutate, status } = useMutation(createGarment);
+  const { mutate } = useMutation(createGarment);
   // const { mutate: editGarmentMutate } = useMutation(editGarment);
   const { data } = useQuery(['garments', id], () => getGarmentById(id));
   const [autocompleteValue, setAutocompleteValue] = useState<AnyTag[]>([]);
@@ -66,6 +68,7 @@ export const useCreateClothes = () => {
       },
       {
         onSuccess: () => {
+          addNotification({ message: 'Login success', type: 'error' });
           history.push(ROUTE_PATHS.main);
         },
       }
@@ -104,7 +107,6 @@ export const useCreateClothes = () => {
 
   return {
     tags,
-    status,
     control,
     onSubmit,
     watch,

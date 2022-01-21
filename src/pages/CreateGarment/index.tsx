@@ -8,7 +8,6 @@ import { CreateGarmentForm, CreateGarmentSubmit, CreateGarmentTextField } from '
 
 import Autocomplete from 'components/Autocomplete';
 import FileUpload from 'components/FileUpload';
-import FormSubmitStatus from 'components/FormSubmitStatus';
 
 export interface ICreateClothesValues {
   title: string;
@@ -19,7 +18,7 @@ export interface ICreateClothesValues {
 }
 
 const CreateGarment: FC = () => {
-  const { status, control, onSubmit, watch, register, setValue, setAutocompleteValue, autocompleteValue, tags } =
+  const { control, onSubmit, watch, register, setValue, setAutocompleteValue, autocompleteValue, tags } =
     useCreateClothes();
 
   return (
@@ -37,7 +36,6 @@ const CreateGarment: FC = () => {
           setValue={setValue}
           disabled={!!watch('imageUrl')}
         />
-        <FormSubmitStatus status={status} />
         <CreateGarmentSubmit type="submit" variant="contained" color="primary">
           Submit
         </CreateGarmentSubmit>

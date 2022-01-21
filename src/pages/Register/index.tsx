@@ -6,12 +6,12 @@ import { getFormFieldConfigurations } from './helpers';
 import { useCreateClothes } from './hooks';
 import { LoginForm, LoginSubmit, LoginTextField } from './styled';
 
-const Login: FC = () => {
+const Register: FC = () => {
   const { control, onSubmit } = useCreateClothes();
 
   return (
     <Box>
-      <Typography>Log in</Typography>
+      <Typography>Register</Typography>
       <LoginForm component="form" onSubmit={onSubmit}>
         {getFormFieldConfigurations(control).map((props, index) => (
           <LoginTextField {...props} key={index} />
@@ -24,4 +24,4 @@ const Login: FC = () => {
   );
 };
 
-export default Login;
+export default Register;

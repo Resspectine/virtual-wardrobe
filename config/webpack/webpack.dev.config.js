@@ -30,10 +30,5 @@ module.exports = {
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
     }),
-    new webpack.DllReferencePlugin({
-      context: path.resolve('src'),
-      manifest: require(path.resolve('dist', 'vendors/vendors-manifest.json')),
-      name: 'vendors',
-    }),
   ],
 };

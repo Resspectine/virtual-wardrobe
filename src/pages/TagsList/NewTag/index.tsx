@@ -7,8 +7,6 @@ import { getFormFieldConfigurations } from './helpers';
 import { useNewTag } from './hooks';
 import { NewTagActionsWrapper, NewTagForm, NewTagTextField, NewTagWrapper } from './styled';
 
-import FormSubmitStatus from 'components/FormSubmitStatus';
-
 export interface INewTagValues extends Record<string, any> {
   title: string;
   addMore: boolean;
@@ -19,7 +17,7 @@ export interface INewTag {
 }
 
 const NewTag: FC<INewTag> = forwardRef(({ closeModal }, _) => {
-  const { status, control, onSubmit, register } = useNewTag({ closeModal });
+  const { control, onSubmit, register } = useNewTag({ closeModal });
 
   return (
     <NewTagWrapper>
@@ -29,7 +27,6 @@ const NewTag: FC<INewTag> = forwardRef(({ closeModal }, _) => {
           <NewTagTextField {...props} key={index} />
         ))}
         <FormControlLabel control={<Checkbox {...register('addMore')} />} label="Add more" />
-        <FormSubmitStatus status={status} />
         <NewTagActionsWrapper>
           <Button onClick={closeModal} variant="outlined">
             Close

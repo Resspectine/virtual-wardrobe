@@ -5,6 +5,7 @@ import { ROUTE_PATHS } from './constants';
 import CreateGarment from 'pages/CreateGarment';
 import Login from 'pages/Login';
 import Main from 'pages/Main';
+import Register from 'pages/Register';
 import TagsList from 'pages/TagsList';
 
 export interface IRoute extends RouteProps {
@@ -16,13 +17,13 @@ const routes: IRoute[] = [
     path: ROUTE_PATHS.createGarment,
     component: CreateGarment,
     exact: true,
-    requiresAuthentication: false,
+    requiresAuthentication: true,
   },
   {
     path: ROUTE_PATHS.editGarment(),
     component: CreateGarment,
     exact: true,
-    requiresAuthentication: false,
+    requiresAuthentication: true,
   },
   {
     path: ROUTE_PATHS.main,
@@ -34,6 +35,12 @@ const routes: IRoute[] = [
     path: ROUTE_PATHS.tagsList,
     component: TagsList,
     exact: true,
+    requiresAuthentication: true,
+  },
+  {
+    path: ROUTE_PATHS.login,
+    component: Login,
+    exact: true,
     requiresAuthentication: false,
   },
   {
@@ -43,8 +50,14 @@ const routes: IRoute[] = [
     requiresAuthentication: false,
   },
   {
+    path: ROUTE_PATHS.register,
+    component: Register,
+    exact: true,
+    requiresAuthentication: false,
+  },
+  {
     path: ROUTE_PATHS[404],
-    component: CreateGarment,
+    component: Login,
     exact: true,
     requiresAuthentication: false,
   },
