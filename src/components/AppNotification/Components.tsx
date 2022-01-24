@@ -2,7 +2,7 @@ import { FC, useEffect, useRef, useState } from 'react';
 
 import { AppNotificationMessageCancel, AppNotificationMessageWrapper } from './styled';
 
-import { Notification } from '.';
+import { Notification } from 'types/notification';
 
 interface AppNotificationMessageProps {
   notification: Notification;

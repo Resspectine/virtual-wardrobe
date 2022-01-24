@@ -5,7 +5,7 @@ import { createNewTag } from './mock';
 
 import { INewTag, INewTagValues } from '.';
 
-import { useAppNotification } from 'components/AppNotification';
+import { useAppNotification } from 'store/appNotification';
 
 export const useNewTag = ({ closeModal }: INewTag) => {
   const queryClient = useQueryClient();

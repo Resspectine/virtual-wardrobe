@@ -8,10 +8,10 @@ import { createGarment, getGarmentById } from './mock';
 
 import { ICreateClothesValues } from '.';
 
-import { useAppNotification } from 'components/AppNotification';
 import { AnyTag, isCustomTag } from 'components/Autocomplete';
 import { loadTags } from 'pages/TagsList/mock';
 import { ROUTE_PATHS } from 'routes/constants';
+import { useAppNotification } from 'store/appNotification';
 
 interface ISendGarment {
   values: ICreateClothesValues;

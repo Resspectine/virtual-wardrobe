@@ -4,8 +4,8 @@ import { useHistory } from 'react-router';
 
 import { RegisterUser, register } from './mock';
 
-import { useAppNotification } from 'components/AppNotification';
 import { ROUTE_PATHS } from 'routes/constants';
+import { useAppNotification } from 'store/appNotification';
 
 export type RegisterValue = RegisterUser;
 

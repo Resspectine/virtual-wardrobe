@@ -4,8 +4,8 @@ import { useHistory } from 'react-router';
 
 import { login, LoginUser } from './mock';
 
-import { useAppNotification } from 'components/AppNotification';
 import { ROUTE_PATHS } from 'routes/constants';
+import { useAppNotification } from 'store/appNotification';
 import { useUser } from 'store/user';
 
 export type LoginValue = LoginUser;
