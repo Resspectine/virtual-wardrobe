@@ -14,7 +14,7 @@ export const login = async (user: LoginUser): Promise<StoreUser> => {
   return (
     await appFetch('authentication/log-in', {
       method: 'POST',
-      body: JSON.stringify(user),
+      body: user,
     })
   ).json();
 };

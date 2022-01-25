@@ -15,7 +15,7 @@ export interface IGarmentProps extends Partial<IHoldClickProps> {
 }
 
 const Garment: FC<IGarmentProps> = ({
-  garment: { description, imageUrl, isFavorite, price, title, wearingAmount, id, tags },
+  garment: { description, picture, isFavorite, price, title, wearingAmount, id, tags },
   onClick,
   toggleFavorite,
   ...hold
@@ -23,10 +23,10 @@ const Garment: FC<IGarmentProps> = ({
   <GarmentWrapper onClick={onClick} {...hold}>
     <StarButton id={id} isFavorite={isFavorite} toggleFavorite={toggleFavorite} />
     <Box>
-      <ImageSection imageUrl={imageUrl} />
+      <ImageSection imageUrl={picture?.url || null} />
       <DataSection description={description} title={title} />
     </Box>
-    <Box display="flex" mx={-0.625}>
+    <Box display="flex" mx={-0.625} flexWrap="wrap">
       {tags?.map(tag => (
         <TagItem tag={tag} key={tag.id} />
       ))}

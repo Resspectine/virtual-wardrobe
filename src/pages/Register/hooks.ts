@@ -21,7 +21,7 @@ export const useCreateClothes = () => {
   const onSubmit = handleSubmit(values => {
     mutate(values, {
       onSuccess: () => {
-        addNotification({ message: 'Login success', type: 'error' });
+        addNotification({ message: 'Register success', type: 'success' });
         history.push(ROUTE_PATHS.login);
       },
     });

@@ -57,9 +57,9 @@ const routes: IRoute[] = [
   },
   {
     path: ROUTE_PATHS[404],
-    component: Login,
+    component: Main,
     exact: true,
-    requiresAuthentication: false,
+    requiresAuthentication: true,
   },
 ];
 

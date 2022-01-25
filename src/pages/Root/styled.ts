@@ -27,6 +27,7 @@ export const RootWrapper = styled(Box)<{ isLoggedIn: boolean }>(({ theme, isLogg
       marginRight: 'auto',
       marginLeft: 'auto',
     },
+    marginBottom: 20,
   }) || { maxWidth: 'min(100%, 400px)', margin: '0 auto' }),
 }));
 

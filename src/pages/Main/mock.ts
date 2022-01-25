@@ -1,6 +1,5 @@
 import { appFetch } from 'lib/controller';
 import { createQueryParams } from 'lib/helpers/queryParams';
-import { deleteGarment } from 'localStorage';
 import { IGarment } from 'types/garment';
 
 interface LoadGarmentsQueryParams {
@@ -31,10 +30,9 @@ export const triggerFavorite = async (garmentId: string): Promise<void> =>
     })
   ).json();
 
-export const removeGarment = (garmentId: string): Promise<void> =>
-  new Promise(resolve => {
-    setTimeout(() => {
-      deleteGarment(garmentId);
-      resolve();
-    }, 500);
-  });
+export const removeGarment = async (garmentId: string): Promise<void> =>
+  (
+    await appFetch(`garment/${garmentId}`, {
+      method: 'DELETE',
+    })
+  ).json();

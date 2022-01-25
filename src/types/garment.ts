@@ -1,3 +1,4 @@
+import { File } from './file';
 import { ITag } from './tag';
 
 export interface IGarment {
@@ -5,8 +6,8 @@ export interface IGarment {
   title: string;
   description: string;
   price: string;
-  imageUrl: string;
   wearingAmount: number;
   isFavorite: boolean;
   tags?: ITag[];
+  picture?: File;
 }

@@ -7,8 +7,5 @@ import { useUser } from 'store/user';
 
 type AuthorizedRouteProps = RouteProps & Omit<IRoute, 'requiresAuthentication'>;
 
-export const AuthorizedRoute: FC<AuthorizedRouteProps> = routeProps => {
-  const user = useUser(state => state.user);
-
-  return user ? <Route {...routeProps} /> : <Redirect to={ROUTE_PATHS.login} />;
-};
+export const AuthorizedRoute: FC<AuthorizedRouteProps> = routeProps =>
+  useUser(state => state.user) ? <Route {...routeProps} /> : <Redirect to={ROUTE_PATHS.login} />;

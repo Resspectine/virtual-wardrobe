@@ -14,7 +14,7 @@ export const useCreateClothes = () => {
   const history = useHistory();
   const addNotification = useAppNotification(state => state.addNotification);
   const setUser = useUser(state => state.setUser);
-  const { mutate, status } = useMutation(login);
+  const { mutate } = useMutation(login);
 
   const { control, handleSubmit } = useForm<LoginValue>({
     defaultValues: { email: '', password: '' },
@@ -24,14 +24,13 @@ export const useCreateClothes = () => {
     mutate(values, {
       onSuccess: user => {
         setUser(user);
-        addNotification({ message: 'Login success', type: 'error' });
+        addNotification({ message: 'Login success', type: 'success' });
         history.push(ROUTE_PATHS.main);
       },
     });
   });
 
   return {
-    status,
     control,
     onSubmit,
   };

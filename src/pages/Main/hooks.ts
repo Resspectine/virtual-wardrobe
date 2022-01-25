@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
@@ -8,11 +8,13 @@ import { useDoubleClick } from 'lib/hooks/useDoubleClick';
 import { useHoldClick } from 'lib/hooks/useHoldClick';
 import { loadTags } from 'pages/TagsList/mock';
 import { ROUTE_PATHS } from 'routes/constants';
+import { useAppNotification } from 'store/appNotification';
 import { IGarment } from 'types/garment';
 
 export const useMain = () => {
   const history = useHistory();
   const queryClient = useQueryClient();
+  const addNotification = useAppNotification(state => state.addNotification);
   const [isFavoriteFirst, setFavoriteFirst] = useState<boolean>(false);
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -21,13 +23,14 @@ export const useMain = () => {
     left: 0,
     top: 0,
   });
-  const tagsQueryParams = selectedTags.join(',');
   const loadGarmentsQueryParams = {
-    filter: tagsQueryParams,
+    filter: selectedTags.join(','),
     orderBy: (isFavoriteFirst && 'isFavorite') || undefined,
     orderDirection: (isFavoriteFirst && 'DESC') || undefined,
   };
-  const { data } = useQuery(['garments', loadGarmentsQueryParams], () => loadGarments(loadGarmentsQueryParams));
+  const { data } = useQuery(['garments', loadGarmentsQueryParams], () => loadGarments(loadGarmentsQueryParams), {
+    keepPreviousData: true,
+  });
   const { data: tagsData } = useQuery('tags', loadTags);
   const { mutate } = useMutation<Response, Error, string, { previousGarments: IGarment[] }>(wearGarment, {
     onMutate: async garmentId => {
@@ -97,6 +100,13 @@ export const useMain = () => {
   );
   const toggleFavorite = useCallback((garmentId: string): void => mutateFavorite(garmentId), []);
 
+  useEffect(() => {
+    addNotification({
+      message: 'Loading garments',
+      type: 'loading',
+    });
+  }, []);
+
   return {
     data,
     hold,
@@ -106,11 +116,10 @@ export const useMain = () => {
     setIsOpened,
     popoverList,
     selectedTags,
-    toggleFavorite,
     anchorPosition,
-    isFavoriteFirst,
+    toggleFavorite,
     setSelectedTags,
-    tagsQueryParams,
+    isFavoriteFirst,
     setFavoriteFirst,
   };
 };

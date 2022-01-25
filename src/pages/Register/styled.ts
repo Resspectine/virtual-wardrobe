@@ -1,15 +1,16 @@
 import { Button } from '@mui/material';
 import { Box, styled } from '@mui/system';
+import { Link } from 'react-router-dom';
 
 import ControlledTextField, { ControlledTextFieldType } from 'components/ControlledTextField';
 
-export const LoginForm = styled(Box)({
+export const RegisterForm = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
 });
 
-export const LoginTextField = styled(ControlledTextField)({
+export const RegisterTextField = styled(ControlledTextField)({
   '&.MuiTextField-root': {
     marginBottom: 10,
     marginTop: 10,
@@ -17,7 +18,18 @@ export const LoginTextField = styled(ControlledTextField)({
   },
 }) as ControlledTextFieldType;
 
-export const LoginSubmit = styled(Button)({
+export const RegisterSubmit = styled(Button)({
   marginTop: 10,
   color: '#fff',
 });
+
+export const RegisterLink = styled(Link)(() => ({
+  color: '#000',
+  textTransform: 'initial',
+}));
+
+export const RegisterNavigation = styled(Box)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+}));

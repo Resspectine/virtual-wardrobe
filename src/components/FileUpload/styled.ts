@@ -9,4 +9,7 @@ export const CloseIcon = styled(Box)({
   position: 'absolute',
   top: 5,
   right: 5,
+  backgroundColor: '#fff',
+  display: 'flex',
+  borderRadius: 8,
 });

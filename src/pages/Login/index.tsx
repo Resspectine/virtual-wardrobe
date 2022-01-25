@@ -1,17 +1,25 @@
+import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 
 import { getFormFieldConfigurations } from './helpers';
 import { useCreateClothes } from './hooks';
-import { LoginForm, LoginSubmit, LoginTextField } from './styled';
+import { LoginForm, LoginLink, LoginNavigation, LoginSubmit, LoginTextField } from './styled';
+
+import { ROUTE_PATHS } from 'routes/constants';
 
 const Login: FC = () => {
   const { control, onSubmit } = useCreateClothes();
 
   return (
     <Box>
-      <Typography>Log in</Typography>
+      <LoginNavigation>
+        <Typography>Log in</Typography>
+        <Button>
+          <LoginLink to={ROUTE_PATHS.register}>To registration page</LoginLink>
+        </Button>
+      </LoginNavigation>
       <LoginForm component="form" onSubmit={onSubmit}>
         {getFormFieldConfigurations(control).map((props, index) => (
           <LoginTextField {...props} key={index} />

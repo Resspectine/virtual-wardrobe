@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { AppNotificationMessage } from './Components';
+import { AppNotificationMessage } from './AppNotificationMessage';
 import { AppNotificationRoot } from './styled';
 
 import { useAppNotification } from 'store/appNotification';
@@ -12,11 +12,7 @@ export const AppNotification: FC = () => {
   return (
     <AppNotificationRoot>
       {notifications.map(notification => (
-        <AppNotificationMessage
-          onRemove={() => deleteNotification(notification.id)}
-          notification={notification}
-          key={notification.id}
-        />
+        <AppNotificationMessage onRemove={deleteNotification} notification={notification} key={notification.id} />
       ))}
     </AppNotificationRoot>
   );

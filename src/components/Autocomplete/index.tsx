@@ -1,5 +1,6 @@
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
+import { isEqual } from 'lodash';
 import { Dispatch, FC, ReactNode, SetStateAction } from 'react';
 
 import { ITag } from 'types/tag';
@@ -51,6 +52,7 @@ const CustomAutocomplete: FC<ICustomAutocompleteProps> = ({ autocompleteOptions,
     }}
     selectOnFocus
     handleHomeEndKeys
+    isOptionEqualToValue={isEqual}
     options={autocompleteOptions}
     getOptionLabel={(option): string => {
       if (isCustomTag(option)) {

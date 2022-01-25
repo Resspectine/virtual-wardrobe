@@ -1,12 +1,11 @@
-import { Control, UseFormWatch } from 'react-hook-form';
+import { Control } from 'react-hook-form';
 
 import { ICreateClothesValues } from '.';
 
 import { IControlledTextField } from 'components/ControlledTextField';
 
 export const getFormFieldConfigurations = (
-  control: Control<ICreateClothesValues>,
-  watch: UseFormWatch<ICreateClothesValues>
+  control: Control<ICreateClothesValues>
 ): IControlledTextField<ICreateClothesValues>[] => [
   {
     controlProps: {
@@ -48,18 +47,6 @@ export const getFormFieldConfigurations = (
       label: 'Price',
       variant: 'outlined',
       type: 'number',
-    },
-  },
-  {
-    controlProps: {
-      control,
-      name: 'imageUrl',
-    },
-    textFieldProps: {
-      label: 'Image',
-      variant: 'outlined',
-      type: 'text',
-      disabled: !!watch('image')[0],
     },
   },
 ];

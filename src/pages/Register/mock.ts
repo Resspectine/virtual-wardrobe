@@ -13,7 +13,7 @@ export const register = async (user: RegisterUser): Promise<void> => {
   return (
     await appFetch('authentication/register', {
       method: 'POST',
-      body: JSON.stringify(user),
+      body: user,
     })
   ).json();
 };

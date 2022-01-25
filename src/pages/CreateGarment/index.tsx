@@ -13,29 +13,22 @@ export interface ICreateClothesValues {
   title: string;
   description: string;
   price: string;
-  imageUrl: string;
   image: File[];
 }
 
 const CreateGarment: FC = () => {
-  const { control, onSubmit, watch, register, setValue, setAutocompleteValue, autocompleteValue, tags } =
+  const { control, onSubmit, watch, register, setValue, setAutocompleteValue, autocompleteValue, tags, errors } =
     useCreateClothes();
 
   return (
     <Box>
       <Typography>Create clothes</Typography>
       <CreateGarmentForm component="form" onSubmit={onSubmit}>
-        {getFormFieldConfigurations(control, watch).map((props, index) => (
+        {getFormFieldConfigurations(control).map((props, index) => (
           <CreateGarmentTextField {...props} key={index} />
         ))}
         {tags && <Autocomplete autocompleteOptions={tags} setValue={setAutocompleteValue} value={autocompleteValue} />}
-        <FileUpload
-          register={register}
-          name="image"
-          file={watch('image')[0]}
-          setValue={setValue}
-          disabled={!!watch('imageUrl')}
-        />
+        <FileUpload register={register} name="image" file={watch('image')[0]} setValue={setValue} errors={errors} />
         <CreateGarmentSubmit type="submit" variant="contained" color="primary">
           Submit
         </CreateGarmentSubmit>

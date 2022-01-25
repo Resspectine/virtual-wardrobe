@@ -24,7 +24,7 @@ export const useNewTag = ({ closeModal }: INewTag) => {
 
     mutate(restValues, {
       onSuccess: () => {
-        addNotification({ message: 'Login success', type: 'error' });
+        addNotification({ message: 'Tag created successfully', type: 'success' });
         queryClient.invalidateQueries('tags');
         reset();
 
