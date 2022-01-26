@@ -1,5 +1,6 @@
 export interface File {
-  url: string;
-  key: string;
+  filename: string;
+  mimetype: string;
+  path: string;
   id: string;
 }

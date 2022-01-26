@@ -13,7 +13,7 @@ export const appFetch: (
     credentials: 'include',
   });
 
-  if (request.status === 401) {
+  if (request.status === 401 || request.status === 400) {
     throw new Error('Unauthorized');
   }
 

@@ -3,14 +3,14 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { FC } from 'react';
 
-import { useTagsList } from './hooks';
+import { useTags } from './hooks';
 import NewTag from './NewTag';
 import { TagsWrapper } from './styled';
 
 import TagItem from 'components/TagItem';
 
-const TagsList: FC = () => {
-  const { data, isModalOpened, setIsModalOpened, onDelete } = useTagsList();
+const Tags: FC = () => {
+  const { data, isModalOpened, setIsModalOpened, onDelete } = useTags();
 
   return (
     <Box>
@@ -31,4 +31,4 @@ const TagsList: FC = () => {
   );
 };
 
-export default TagsList;
+export default Tags;

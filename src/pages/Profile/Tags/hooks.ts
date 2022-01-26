@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 
 import { loadTags, removeTag } from './mock';
 
-export const useTagsList = () => {
+export const useTags = () => {
   const queryClient = useQueryClient();
   const [isModalOpened, setIsModalOpened] = useState(false);
   const { data } = useQuery('tags', loadTags);

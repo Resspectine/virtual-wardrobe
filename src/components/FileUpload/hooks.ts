@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 
+import { getDataStringFromFile } from 'lib/helpers/files';
 import { ICreateClothesValues } from 'pages/CreateGarment';
 
 interface UseFileUploadControl {
@@ -14,13 +15,7 @@ export const useFileUploadControl = ({ setValue, name, file }: UseFileUploadCont
 
   useEffect(() => {
     if (file) {
-      const reader = new FileReader();
-
-      reader.onloadend = (): void => {
-        setFileUrl(reader.result?.toString() || '');
-      };
-
-      reader.readAsDataURL(file);
+      getDataStringFromFile(file, setFileUrl);
     }
   }, [file]);
 

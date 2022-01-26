@@ -2,7 +2,7 @@ import Gesture from '@mui/icons-material/Gesture';
 import StarBorder from '@mui/icons-material/StarBorder';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
-import { FC } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 
 import {
   GarmentDataDescription,
@@ -13,6 +13,9 @@ import {
   GarmentStarButton,
   GarmentWearingAmount,
 } from './styled';
+
+import { getDataStringFromFile, getFileFromStream } from 'lib/helpers/files';
+import { File as PublicFile } from 'types/file';
 
 interface StarButtonProps {
   isFavorite: boolean;
@@ -33,19 +36,34 @@ export const StarButton: FC<StarButtonProps> = ({ isFavorite, toggleFavorite, id
 );
 
 interface ImageSectionProps {
-  imageUrl: string | null;
+  image: PublicFile | null;
 }
 
-export const ImageSection: FC<ImageSectionProps> = ({ imageUrl }) =>
-  (imageUrl && (
-    <>
-      <Box>
-        <GarmentImage component="img" src={imageUrl} alt="Something went wrong" />
-      </Box>
-      <GarmentImageDivider />
-    </>
-  )) ||
-  null;
+export const ImageSection: FC<ImageSectionProps> = ({ image }) => {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  const loadPictureFile = useCallback(async (): Promise<void> => {
+    const file = await getFileFromStream(image);
+
+    getDataStringFromFile(file, setImageUrl);
+  }, [image]);
+
+  useEffect(() => {
+    loadPictureFile();
+  }, [image]);
+
+  return (
+    (imageUrl && (
+      <>
+        <Box>
+          <GarmentImage component="img" src={imageUrl} alt="Something went wrong" />
+        </Box>
+        <GarmentImageDivider />
+      </>
+    )) ||
+    null
+  );
+};
 
 interface DataSectionProps {
   title: string;

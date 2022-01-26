@@ -6,7 +6,7 @@ import { loadGarments, removeGarment, triggerFavorite, wearGarment } from './moc
 
 import { useDoubleClick } from 'lib/hooks/useDoubleClick';
 import { useHoldClick } from 'lib/hooks/useHoldClick';
-import { loadTags } from 'pages/TagsList/mock';
+import { loadTags } from 'pages/Profile/mock';
 import { ROUTE_PATHS } from 'routes/constants';
 import { useAppNotification } from 'store/appNotification';
 import { IGarment } from 'types/garment';

@@ -9,3 +9,6 @@ type AuthorizedRouteProps = RouteProps & Omit<IRoute, 'requiresAuthentication'>;
 
 export const AuthorizedRoute: FC<AuthorizedRouteProps> = routeProps =>
   useUser(state => state.user) ? <Route {...routeProps} /> : <Redirect to={ROUTE_PATHS.login} />;
+
+export const OnlyUnAuthorizedRoute: FC<AuthorizedRouteProps> = routeProps =>
+  !useUser(state => state.user) ? <Route {...routeProps} /> : <Redirect to={ROUTE_PATHS.main} />;

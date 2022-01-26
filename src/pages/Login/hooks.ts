@@ -16,7 +16,7 @@ export const useCreateClothes = () => {
   const setUser = useUser(state => state.setUser);
   const { mutate } = useMutation(login);
 
-  const { control, handleSubmit } = useForm<LoginValue>({
+  const { control, handleSubmit, setValue } = useForm<LoginValue>({
     defaultValues: { email: '', password: '' },
   });
 
@@ -26,6 +26,13 @@ export const useCreateClothes = () => {
         setUser(user);
         addNotification({ message: 'Login success', type: 'success' });
         history.push(ROUTE_PATHS.main);
+      },
+      onError: () => {
+        addNotification({
+          message: 'Error ocurred, try again please',
+          type: 'error',
+        });
+        setValue('password', '');
       },
     });
   });

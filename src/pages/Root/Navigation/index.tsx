@@ -4,8 +4,7 @@ import { FC } from 'react';
 
 import { useNavigationControl } from './hooks';
 import { NavigationLink, NavigationWrapper } from './styled';
-import ThemeModeToggle from './ThemeModeToggle';
-import UserLogout from './UserLogout';
+import UserProfile from './UserProfile';
 
 import { camelToSentenceCase } from 'lib/helpers/textTransformations';
 import { KEYS_TO_OMIT, ROUTE_PATHS, TypesToOmit } from 'routes/constants';
@@ -22,8 +21,7 @@ const Navigation: FC = () => {
           <NavigationLink isCurrentPage={isCurrentPage(link)}>{camelToSentenceCase(linkName)}</NavigationLink>
         </Box>
       ))}
-      <ThemeModeToggle />
-      <UserLogout />
+      <UserProfile />
     </NavigationWrapper>
   );
 };

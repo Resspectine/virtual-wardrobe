@@ -23,10 +23,10 @@ const Garment: FC<IGarmentProps> = ({
   <GarmentWrapper onClick={onClick} {...hold}>
     <StarButton id={id} isFavorite={isFavorite} toggleFavorite={toggleFavorite} />
     <Box>
-      <ImageSection imageUrl={picture?.url || null} />
+      <ImageSection image={picture || null} />
       <DataSection description={description} title={title} />
     </Box>
-    <Box display="flex" mx={-0.625} flexWrap="wrap">
+    <Box display="flex" mx={-0.625} flexWrap="wrap" flex="1" alignItems="flex-start">
       {tags?.map(tag => (
         <TagItem tag={tag} key={tag.id} />
       ))}

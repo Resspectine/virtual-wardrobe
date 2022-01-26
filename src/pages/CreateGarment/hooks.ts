@@ -9,7 +9,8 @@ import { ICreateClothesValues } from '.';
 
 import { AnyTag, isCustomTag } from 'components/Autocomplete';
 import { fileFetch } from 'lib/controller/file';
-import { loadTags } from 'pages/TagsList/mock';
+import { getFileFromStream } from 'lib/helpers/files';
+import { loadTags } from 'pages/Profile/mock';
 import { ROUTE_PATHS } from 'routes/constants';
 import { useAppNotification } from 'store/appNotification';
 import { File as PictureFile } from 'types/file';
@@ -19,7 +20,7 @@ interface ISendGarment {
   file?: PictureFile;
 }
 
-async function getFileFromUrl(url: string, name: string, defaultType = 'image/jpeg') {
+export async function getFileFromUrl(url: string, name: string, defaultType = 'image/jpeg') {
   const response = await fetch(url);
   const data = await response.blob();
 
@@ -57,8 +58,7 @@ export const useCreateClothes = () => {
   useEffect(() => {
     const setPicture = async () => {
       if (data?.picture) {
-        const file = await getFileFromUrl(data.picture.url, data.picture.key);
-
+        const file = await getFileFromStream(data.picture, data?.picture?.filename);
         setValue('image', [file]);
       }
     };
@@ -112,7 +112,7 @@ export const useCreateClothes = () => {
       return;
     }
 
-    if (watch('image')[0].name === data?.picture?.key) {
+    if (watch('image')[0].name === data?.picture?.filename) {
       sendGarment({
         values,
       });
