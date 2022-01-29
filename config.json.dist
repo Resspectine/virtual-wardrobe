@@ -1,15 +1,3 @@
 {
-  "BaseApiUrl": "${BASE_API_URL}",
-  "DicomApiUrl": "${DICOM_API_URL}",
-  "DicomUploadEnvironment": "${DICOM_UPLOAD_ENVIRONMENT}",
-  "UploadFileUrl": "${UPLOAD_FILE_URL}",
-  "ApiUrl": "${API_URL}",
-  "Region": "${REGION}",
-  "UserPoolId": "${USER_POOL_ID}",
-  "UserPoolWebClientId": "${USER_POOL_WEB_CLIENT_ID}",
-  "GoogleApiKey": "${GOOGLE_API_KEY}",
-  "AwsApiGateway": "${AWS_API_GATEWAY}",
-  "BuildVersion": "${BUILD_VERSION}",
-  "DisabledPortals": "${DISABLED_PORTALS}",
-  "DoctorPatientContract": "${DOCTOR_PATIENT_CONTRACT}"
+  "ApiUrl": "$API_URL"
 }

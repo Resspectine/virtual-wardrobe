@@ -12,7 +12,11 @@ export const getDataStringFromFile = (file: File, setFileUrl: (file: string) => 
 };
 
 export const getFileFromStream = async (image: PublicFile | null, name = 'temp'): Promise<File> => {
-  const fileStream = await appFetch(`files/${image?.id}`, {
+  if (!image) {
+    return new File([], 'temp');
+  }
+
+  const fileStream = await appFetch(`files/${image.id}`, {
     method: 'GET',
   });
 

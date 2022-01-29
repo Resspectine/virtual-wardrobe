@@ -1,3 +1,5 @@
+import config from '../../../config.json';
+
 export const appFetch: (
   input: RequestInfo,
   init?: (Omit<RequestInit, 'body'> & { body?: Record<string, unknown> }) | undefined
@@ -6,7 +8,7 @@ export const appFetch: (
 
   headers.append('Content-Type', 'application/json');
 
-  const request = await fetch(`http://localhost:3000/api/${input}`, {
+  const request = await fetch(`http://${config.ApiUrl}/api/${input}`, {
     ...init,
     body: JSON.stringify(init?.body || undefined),
     headers,
